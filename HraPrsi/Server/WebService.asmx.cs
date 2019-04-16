@@ -16,23 +16,19 @@ namespace Server
     // [System.Web.Script.Services.ScriptService]
     public class WebService : System.Web.Services.WebService
     {
+        private string test = "persistent";
 
         [WebMethod]
-        public string HelloWorld()
+        public string AddString()
         {
-            return "Hello World";
+            test = "1" + test;
+            return test;
         }
 
         [WebMethod]
-        public int Add(List<int> listInt)
+        public string ReadString()
         {
-            int result = 0;
-            for (int i = 0; i < listInt.Count; i++)
-            {
-                result = result + listInt[i];
-            }
-
-            return result;
+            return test;
         }
     }
 }

@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "Server\Server.csproj", "{78CA2164-A0D8-488A-A133-1A10C7D05D2C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "Client\Client.csproj", "{D3BE2AF4-960D-4F10-937A-17B8FBF75D38}"
+	ProjectSection(ProjectDependencies) = postProject
+		{78CA2164-A0D8-488A-A133-1A10C7D05D2C} = {78CA2164-A0D8-488A-A133-1A10C7D05D2C}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

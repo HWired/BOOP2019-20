@@ -16,5 +16,17 @@ namespace Client
         {
             InitializeComponent();
         }
+
+        private void ReadString_Click(object sender, EventArgs e)
+        {
+            PrsiService.WebServiceSoapClient client = new PrsiService.WebServiceSoapClient();
+            Console.WriteLine(client.ReadString());
+        }
+
+        private void AddString_Click(object sender, EventArgs e)
+        {
+            PrsiService.WebServiceSoapClient client = new PrsiService.WebServiceSoapClient();
+            client.AddString();
+        }
     }
 }

@@ -8,25 +8,41 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using Client.Networking;
+
 namespace Client
 {
     public partial class Form1 : Form
     {
+        SessionManager sessionManager;
+
         public Form1()
         {
             InitializeComponent();
+
+            sessionManager = new SessionManager();
         }
 
-        private void ReadString_Click(object sender, EventArgs e)
+        private void NewGameBtn_Click(object sender, EventArgs e)
         {
-            PrsiService.WebServiceSoapClient client = new PrsiService.WebServiceSoapClient();
-            Console.WriteLine(client.ReadString());
+            sessionManager.CreateSession();
+            SessionCodeInput.Text = SessionManager.sessionName;
         }
 
-        private void AddString_Click(object sender, EventArgs e)
+        private void JoinGameBtn_Click(object sender, EventArgs e)
         {
-            PrsiService.WebServiceSoapClient client = new PrsiService.WebServiceSoapClient();
-            client.AddString();
+            string sessionName = SessionCodeInput.Text;
+            sessionManager.JoinSession(sessionName);
+        }
+
+        private void GetStateBtn_Click(object sender, EventArgs e)
+        {
+            sessionManager.LoadState();
+        }
+
+        private void UpdateStateBtn_Click(object sender, EventArgs e)
+        {
+            sessionManager.SaveState();
         }
     }
 }

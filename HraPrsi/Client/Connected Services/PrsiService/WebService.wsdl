@@ -2,54 +2,89 @@
 <wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
     <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
-      <s:element name="AddString">
+      <s:element name="RegisterSession">
         <s:complexType />
       </s:element>
-      <s:element name="AddStringResponse">
+      <s:element name="RegisterSessionResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="AddStringResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RegisterSessionResult" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="ReadString">
-        <s:complexType />
-      </s:element>
-      <s:element name="ReadStringResponse">
+      <s:element name="GetState">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="ReadStringResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sessionName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetStateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetStateResult" type="tns:AppState" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="AppState">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="integer" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="str" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SaveState">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="appState" type="tns:AppState" />
+            <s:element minOccurs="0" maxOccurs="1" name="sessionName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveStateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SaveStateResult" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
     </s:schema>
   </wsdl:types>
-  <wsdl:message name="AddStringSoapIn">
-    <wsdl:part name="parameters" element="tns:AddString" />
+  <wsdl:message name="RegisterSessionSoapIn">
+    <wsdl:part name="parameters" element="tns:RegisterSession" />
   </wsdl:message>
-  <wsdl:message name="AddStringSoapOut">
-    <wsdl:part name="parameters" element="tns:AddStringResponse" />
+  <wsdl:message name="RegisterSessionSoapOut">
+    <wsdl:part name="parameters" element="tns:RegisterSessionResponse" />
   </wsdl:message>
-  <wsdl:message name="ReadStringSoapIn">
-    <wsdl:part name="parameters" element="tns:ReadString" />
+  <wsdl:message name="GetStateSoapIn">
+    <wsdl:part name="parameters" element="tns:GetState" />
   </wsdl:message>
-  <wsdl:message name="ReadStringSoapOut">
-    <wsdl:part name="parameters" element="tns:ReadStringResponse" />
+  <wsdl:message name="GetStateSoapOut">
+    <wsdl:part name="parameters" element="tns:GetStateResponse" />
+  </wsdl:message>
+  <wsdl:message name="SaveStateSoapIn">
+    <wsdl:part name="parameters" element="tns:SaveState" />
+  </wsdl:message>
+  <wsdl:message name="SaveStateSoapOut">
+    <wsdl:part name="parameters" element="tns:SaveStateResponse" />
   </wsdl:message>
   <wsdl:portType name="WebServiceSoap">
-    <wsdl:operation name="AddString">
-      <wsdl:input message="tns:AddStringSoapIn" />
-      <wsdl:output message="tns:AddStringSoapOut" />
+    <wsdl:operation name="RegisterSession">
+      <wsdl:input message="tns:RegisterSessionSoapIn" />
+      <wsdl:output message="tns:RegisterSessionSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="ReadString">
-      <wsdl:input message="tns:ReadStringSoapIn" />
-      <wsdl:output message="tns:ReadStringSoapOut" />
+    <wsdl:operation name="GetState">
+      <wsdl:input message="tns:GetStateSoapIn" />
+      <wsdl:output message="tns:GetStateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveState">
+      <wsdl:input message="tns:SaveStateSoapIn" />
+      <wsdl:output message="tns:SaveStateSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WebServiceSoap" type="tns:WebServiceSoap">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="AddString">
-      <soap:operation soapAction="http://tempuri.org/AddString" style="document" />
+    <wsdl:operation name="RegisterSession">
+      <soap:operation soapAction="http://tempuri.org/RegisterSession" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -57,8 +92,17 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="ReadString">
-      <soap:operation soapAction="http://tempuri.org/ReadString" style="document" />
+    <wsdl:operation name="GetState">
+      <soap:operation soapAction="http://tempuri.org/GetState" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveState">
+      <soap:operation soapAction="http://tempuri.org/SaveState" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -69,8 +113,8 @@
   </wsdl:binding>
   <wsdl:binding name="WebServiceSoap12" type="tns:WebServiceSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="AddString">
-      <soap12:operation soapAction="http://tempuri.org/AddString" style="document" />
+    <wsdl:operation name="RegisterSession">
+      <soap12:operation soapAction="http://tempuri.org/RegisterSession" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -78,8 +122,17 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="ReadString">
-      <soap12:operation soapAction="http://tempuri.org/ReadString" style="document" />
+    <wsdl:operation name="GetState">
+      <soap12:operation soapAction="http://tempuri.org/GetState" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveState">
+      <soap12:operation soapAction="http://tempuri.org/SaveState" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

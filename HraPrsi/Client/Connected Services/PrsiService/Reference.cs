@@ -9,40 +9,109 @@
 //------------------------------------------------------------------------------
 
 namespace Client.PrsiService {
+    using System.Runtime.Serialization;
+    using System;
     
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="AppState", Namespace="http://tempuri.org/")]
+    [System.SerializableAttribute()]
+    public partial class AppState : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        private int integerField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string strField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public int integer {
+            get {
+                return this.integerField;
+            }
+            set {
+                if ((this.integerField.Equals(value) != true)) {
+                    this.integerField = value;
+                    this.RaisePropertyChanged("integer");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
+        public string str {
+            get {
+                return this.strField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.strField, value) != true)) {
+                    this.strField = value;
+                    this.RaisePropertyChanged("str");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="PrsiService.WebServiceSoap")]
     public interface WebServiceSoap {
         
-        // CODEGEN: Generating message contract since element name AddStringResult from namespace http://tempuri.org/ is not marked nillable
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/AddString", ReplyAction="*")]
-        Client.PrsiService.AddStringResponse AddString(Client.PrsiService.AddStringRequest request);
+        // CODEGEN: Generating message contract since element name RegisterSessionResult from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/RegisterSession", ReplyAction="*")]
+        Client.PrsiService.RegisterSessionResponse RegisterSession(Client.PrsiService.RegisterSessionRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/AddString", ReplyAction="*")]
-        System.Threading.Tasks.Task<Client.PrsiService.AddStringResponse> AddStringAsync(Client.PrsiService.AddStringRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/RegisterSession", ReplyAction="*")]
+        System.Threading.Tasks.Task<Client.PrsiService.RegisterSessionResponse> RegisterSessionAsync(Client.PrsiService.RegisterSessionRequest request);
         
-        // CODEGEN: Generating message contract since element name ReadStringResult from namespace http://tempuri.org/ is not marked nillable
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ReadString", ReplyAction="*")]
-        Client.PrsiService.ReadStringResponse ReadString(Client.PrsiService.ReadStringRequest request);
+        // CODEGEN: Generating message contract since element name sessionName from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetState", ReplyAction="*")]
+        Client.PrsiService.GetStateResponse GetState(Client.PrsiService.GetStateRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ReadString", ReplyAction="*")]
-        System.Threading.Tasks.Task<Client.PrsiService.ReadStringResponse> ReadStringAsync(Client.PrsiService.ReadStringRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetState", ReplyAction="*")]
+        System.Threading.Tasks.Task<Client.PrsiService.GetStateResponse> GetStateAsync(Client.PrsiService.GetStateRequest request);
+        
+        // CODEGEN: Generating message contract since element name appState from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveState", ReplyAction="*")]
+        Client.PrsiService.SaveStateResponse SaveState(Client.PrsiService.SaveStateRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveState", ReplyAction="*")]
+        System.Threading.Tasks.Task<Client.PrsiService.SaveStateResponse> SaveStateAsync(Client.PrsiService.SaveStateRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class AddStringRequest {
+    public partial class RegisterSessionRequest {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="AddString", Namespace="http://tempuri.org/", Order=0)]
-        public Client.PrsiService.AddStringRequestBody Body;
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="RegisterSession", Namespace="http://tempuri.org/", Order=0)]
+        public Client.PrsiService.RegisterSessionRequestBody Body;
         
-        public AddStringRequest() {
+        public RegisterSessionRequest() {
         }
         
-        public AddStringRequest(Client.PrsiService.AddStringRequestBody Body) {
+        public RegisterSessionRequest(Client.PrsiService.RegisterSessionRequestBody Body) {
             this.Body = Body;
         }
     }
@@ -51,9 +120,9 @@ namespace Client.PrsiService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.Runtime.Serialization.DataContractAttribute()]
-    public partial class AddStringRequestBody {
+    public partial class RegisterSessionRequestBody {
         
-        public AddStringRequestBody() {
+        public RegisterSessionRequestBody() {
         }
     }
     
@@ -61,15 +130,15 @@ namespace Client.PrsiService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class AddStringResponse {
+    public partial class RegisterSessionResponse {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="AddStringResponse", Namespace="http://tempuri.org/", Order=0)]
-        public Client.PrsiService.AddStringResponseBody Body;
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="RegisterSessionResponse", Namespace="http://tempuri.org/", Order=0)]
+        public Client.PrsiService.RegisterSessionResponseBody Body;
         
-        public AddStringResponse() {
+        public RegisterSessionResponse() {
         }
         
-        public AddStringResponse(Client.PrsiService.AddStringResponseBody Body) {
+        public RegisterSessionResponse(Client.PrsiService.RegisterSessionResponseBody Body) {
             this.Body = Body;
         }
     }
@@ -78,43 +147,16 @@ namespace Client.PrsiService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
-    public partial class AddStringResponseBody {
+    public partial class RegisterSessionResponseBody {
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public string AddStringResult;
+        public string RegisterSessionResult;
         
-        public AddStringResponseBody() {
+        public RegisterSessionResponseBody() {
         }
         
-        public AddStringResponseBody(string AddStringResult) {
-            this.AddStringResult = AddStringResult;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class ReadStringRequest {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="ReadString", Namespace="http://tempuri.org/", Order=0)]
-        public Client.PrsiService.ReadStringRequestBody Body;
-        
-        public ReadStringRequest() {
-        }
-        
-        public ReadStringRequest(Client.PrsiService.ReadStringRequestBody Body) {
-            this.Body = Body;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.Runtime.Serialization.DataContractAttribute()]
-    public partial class ReadStringRequestBody {
-        
-        public ReadStringRequestBody() {
+        public RegisterSessionResponseBody(string RegisterSessionResult) {
+            this.RegisterSessionResult = RegisterSessionResult;
         }
     }
     
@@ -122,15 +164,15 @@ namespace Client.PrsiService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class ReadStringResponse {
+    public partial class GetStateRequest {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="ReadStringResponse", Namespace="http://tempuri.org/", Order=0)]
-        public Client.PrsiService.ReadStringResponseBody Body;
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetState", Namespace="http://tempuri.org/", Order=0)]
+        public Client.PrsiService.GetStateRequestBody Body;
         
-        public ReadStringResponse() {
+        public GetStateRequest() {
         }
         
-        public ReadStringResponse(Client.PrsiService.ReadStringResponseBody Body) {
+        public GetStateRequest(Client.PrsiService.GetStateRequestBody Body) {
             this.Body = Body;
         }
     }
@@ -139,16 +181,122 @@ namespace Client.PrsiService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
-    public partial class ReadStringResponseBody {
+    public partial class GetStateRequestBody {
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public string ReadStringResult;
+        public string sessionName;
         
-        public ReadStringResponseBody() {
+        public GetStateRequestBody() {
         }
         
-        public ReadStringResponseBody(string ReadStringResult) {
-            this.ReadStringResult = ReadStringResult;
+        public GetStateRequestBody(string sessionName) {
+            this.sessionName = sessionName;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GetStateResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetStateResponse", Namespace="http://tempuri.org/", Order=0)]
+        public Client.PrsiService.GetStateResponseBody Body;
+        
+        public GetStateResponse() {
+        }
+        
+        public GetStateResponse(Client.PrsiService.GetStateResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class GetStateResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public Client.PrsiService.AppState GetStateResult;
+        
+        public GetStateResponseBody() {
+        }
+        
+        public GetStateResponseBody(Client.PrsiService.AppState GetStateResult) {
+            this.GetStateResult = GetStateResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SaveStateRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SaveState", Namespace="http://tempuri.org/", Order=0)]
+        public Client.PrsiService.SaveStateRequestBody Body;
+        
+        public SaveStateRequest() {
+        }
+        
+        public SaveStateRequest(Client.PrsiService.SaveStateRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SaveStateRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public Client.PrsiService.AppState appState;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public string sessionName;
+        
+        public SaveStateRequestBody() {
+        }
+        
+        public SaveStateRequestBody(Client.PrsiService.AppState appState, string sessionName) {
+            this.appState = appState;
+            this.sessionName = sessionName;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SaveStateResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SaveStateResponse", Namespace="http://tempuri.org/", Order=0)]
+        public Client.PrsiService.SaveStateResponseBody Body;
+        
+        public SaveStateResponse() {
+        }
+        
+        public SaveStateResponse(Client.PrsiService.SaveStateResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SaveStateResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string SaveStateResult;
+        
+        public SaveStateResponseBody() {
+        }
+        
+        public SaveStateResponseBody(string SaveStateResult) {
+            this.SaveStateResult = SaveStateResult;
         }
     }
     
@@ -180,49 +328,78 @@ namespace Client.PrsiService {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Client.PrsiService.AddStringResponse Client.PrsiService.WebServiceSoap.AddString(Client.PrsiService.AddStringRequest request) {
-            return base.Channel.AddString(request);
+        Client.PrsiService.RegisterSessionResponse Client.PrsiService.WebServiceSoap.RegisterSession(Client.PrsiService.RegisterSessionRequest request) {
+            return base.Channel.RegisterSession(request);
         }
         
-        public string AddString() {
-            Client.PrsiService.AddStringRequest inValue = new Client.PrsiService.AddStringRequest();
-            inValue.Body = new Client.PrsiService.AddStringRequestBody();
-            Client.PrsiService.AddStringResponse retVal = ((Client.PrsiService.WebServiceSoap)(this)).AddString(inValue);
-            return retVal.Body.AddStringResult;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Client.PrsiService.AddStringResponse> Client.PrsiService.WebServiceSoap.AddStringAsync(Client.PrsiService.AddStringRequest request) {
-            return base.Channel.AddStringAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<Client.PrsiService.AddStringResponse> AddStringAsync() {
-            Client.PrsiService.AddStringRequest inValue = new Client.PrsiService.AddStringRequest();
-            inValue.Body = new Client.PrsiService.AddStringRequestBody();
-            return ((Client.PrsiService.WebServiceSoap)(this)).AddStringAsync(inValue);
+        public string RegisterSession() {
+            Client.PrsiService.RegisterSessionRequest inValue = new Client.PrsiService.RegisterSessionRequest();
+            inValue.Body = new Client.PrsiService.RegisterSessionRequestBody();
+            Client.PrsiService.RegisterSessionResponse retVal = ((Client.PrsiService.WebServiceSoap)(this)).RegisterSession(inValue);
+            return retVal.Body.RegisterSessionResult;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Client.PrsiService.ReadStringResponse Client.PrsiService.WebServiceSoap.ReadString(Client.PrsiService.ReadStringRequest request) {
-            return base.Channel.ReadString(request);
+        System.Threading.Tasks.Task<Client.PrsiService.RegisterSessionResponse> Client.PrsiService.WebServiceSoap.RegisterSessionAsync(Client.PrsiService.RegisterSessionRequest request) {
+            return base.Channel.RegisterSessionAsync(request);
         }
         
-        public string ReadString() {
-            Client.PrsiService.ReadStringRequest inValue = new Client.PrsiService.ReadStringRequest();
-            inValue.Body = new Client.PrsiService.ReadStringRequestBody();
-            Client.PrsiService.ReadStringResponse retVal = ((Client.PrsiService.WebServiceSoap)(this)).ReadString(inValue);
-            return retVal.Body.ReadStringResult;
+        public System.Threading.Tasks.Task<Client.PrsiService.RegisterSessionResponse> RegisterSessionAsync() {
+            Client.PrsiService.RegisterSessionRequest inValue = new Client.PrsiService.RegisterSessionRequest();
+            inValue.Body = new Client.PrsiService.RegisterSessionRequestBody();
+            return ((Client.PrsiService.WebServiceSoap)(this)).RegisterSessionAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Client.PrsiService.ReadStringResponse> Client.PrsiService.WebServiceSoap.ReadStringAsync(Client.PrsiService.ReadStringRequest request) {
-            return base.Channel.ReadStringAsync(request);
+        Client.PrsiService.GetStateResponse Client.PrsiService.WebServiceSoap.GetState(Client.PrsiService.GetStateRequest request) {
+            return base.Channel.GetState(request);
         }
         
-        public System.Threading.Tasks.Task<Client.PrsiService.ReadStringResponse> ReadStringAsync() {
-            Client.PrsiService.ReadStringRequest inValue = new Client.PrsiService.ReadStringRequest();
-            inValue.Body = new Client.PrsiService.ReadStringRequestBody();
-            return ((Client.PrsiService.WebServiceSoap)(this)).ReadStringAsync(inValue);
+        public Client.PrsiService.AppState GetState(string sessionName) {
+            Client.PrsiService.GetStateRequest inValue = new Client.PrsiService.GetStateRequest();
+            inValue.Body = new Client.PrsiService.GetStateRequestBody();
+            inValue.Body.sessionName = sessionName;
+            Client.PrsiService.GetStateResponse retVal = ((Client.PrsiService.WebServiceSoap)(this)).GetState(inValue);
+            return retVal.Body.GetStateResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Client.PrsiService.GetStateResponse> Client.PrsiService.WebServiceSoap.GetStateAsync(Client.PrsiService.GetStateRequest request) {
+            return base.Channel.GetStateAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Client.PrsiService.GetStateResponse> GetStateAsync(string sessionName) {
+            Client.PrsiService.GetStateRequest inValue = new Client.PrsiService.GetStateRequest();
+            inValue.Body = new Client.PrsiService.GetStateRequestBody();
+            inValue.Body.sessionName = sessionName;
+            return ((Client.PrsiService.WebServiceSoap)(this)).GetStateAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Client.PrsiService.SaveStateResponse Client.PrsiService.WebServiceSoap.SaveState(Client.PrsiService.SaveStateRequest request) {
+            return base.Channel.SaveState(request);
+        }
+        
+        public string SaveState(Client.PrsiService.AppState appState, string sessionName) {
+            Client.PrsiService.SaveStateRequest inValue = new Client.PrsiService.SaveStateRequest();
+            inValue.Body = new Client.PrsiService.SaveStateRequestBody();
+            inValue.Body.appState = appState;
+            inValue.Body.sessionName = sessionName;
+            Client.PrsiService.SaveStateResponse retVal = ((Client.PrsiService.WebServiceSoap)(this)).SaveState(inValue);
+            return retVal.Body.SaveStateResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Client.PrsiService.SaveStateResponse> Client.PrsiService.WebServiceSoap.SaveStateAsync(Client.PrsiService.SaveStateRequest request) {
+            return base.Channel.SaveStateAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Client.PrsiService.SaveStateResponse> SaveStateAsync(Client.PrsiService.AppState appState, string sessionName) {
+            Client.PrsiService.SaveStateRequest inValue = new Client.PrsiService.SaveStateRequest();
+            inValue.Body = new Client.PrsiService.SaveStateRequestBody();
+            inValue.Body.appState = appState;
+            inValue.Body.sessionName = sessionName;
+            return ((Client.PrsiService.WebServiceSoap)(this)).SaveStateAsync(inValue);
         }
     }
 }

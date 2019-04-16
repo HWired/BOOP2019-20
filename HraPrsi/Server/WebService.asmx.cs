@@ -16,19 +16,48 @@ namespace Server
     // [System.Web.Script.Services.ScriptService]
     public class WebService : System.Web.Services.WebService
     {
-        private string test = "persistent";
-
-        [WebMethod]
-        public string AddString()
-        {
-            test = "1" + test;
-            return test;
+        public struct AppState {
+            public int integer;
+            public string str;
         }
 
         [WebMethod]
-        public string ReadString()
+        public string RegisterSession ()
         {
-            return test;
+            string sessionName = RandomString(5);
+
+            Application[sessionName] = new AppState()
+            {
+                integer = 0,
+                str = ""
+            };
+
+            return sessionName;
+        }
+
+        [WebMethod]
+        public AppState GetState (string sessionName)
+        {
+            return (AppState)Application[sessionName];
+        }
+
+        [WebMethod]
+        public string SaveState (AppState appState, string sessionName)
+        {
+            Application[sessionName] = appState;
+
+            if (Application[sessionName] != null)
+                return "Data saved";
+            else
+                return "Data not saved";
+        }
+        
+        private static Random random = new Random();
+        private string RandomString (int length)
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            return new string(Enumerable.Repeat(chars, length)
+              .Select(s => s[random.Next(s.Length)]).ToArray());
         }
     }
 }

@@ -59,6 +59,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Networking\SessionManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
@@ -73,10 +74,16 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <None Include="Connected Services\PrsiService\Client.PrsiService.AddStringResponse.datasource">
+    <None Include="Connected Services\PrsiService\Client.PrsiService.AppState.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\PrsiService\Client.PrsiService.ReadStringResponse.datasource">
+    <None Include="Connected Services\PrsiService\Client.PrsiService.GetStateResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\PrsiService\Client.PrsiService.RegisterSessionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\PrsiService\Client.PrsiService.SaveStateResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\PrsiService\WebService.wsdl" />

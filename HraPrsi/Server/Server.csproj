@@ -72,6 +72,12 @@
     <Content Include="WebService.asmx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\RandomString.cs" />
+    <Compile Include="DataStructures\AppState.cs" />
+    <Compile Include="DataStructures\Card.cs" />
+    <Compile Include="Enums\CardColor.cs" />
+    <Compile Include="Enums\CardType.cs" />
+    <Compile Include="DataStructures\Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WebService.asmx.cs">
       <DependentUpon>WebService.asmx</DependentUpon>

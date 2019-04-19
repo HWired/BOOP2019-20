@@ -3,7 +3,11 @@
   <wsdl:types>
     <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
       <s:element name="RegisterSession">
-        <s:complexType />
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="playerName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
       </s:element>
       <s:element name="RegisterSessionResponse">
         <s:complexType>
@@ -11,6 +15,17 @@
             <s:element minOccurs="0" maxOccurs="1" name="RegisterSessionResult" type="s:string" />
           </s:sequence>
         </s:complexType>
+      </s:element>
+      <s:element name="JoinSession">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="playerName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="JoinSessionResponse">
+        <s:complexType />
       </s:element>
       <s:element name="GetState">
         <s:complexType>
@@ -22,31 +37,56 @@
       <s:element name="GetStateResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="GetStateResult" type="tns:AppState" />
+            <s:element minOccurs="0" maxOccurs="1" name="GetStateResult" type="tns:AppState" />
           </s:sequence>
         </s:complexType>
       </s:element>
       <s:complexType name="AppState">
         <s:sequence>
-          <s:element minOccurs="1" maxOccurs="1" name="integer" type="s:int" />
-          <s:element minOccurs="0" maxOccurs="1" name="str" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="gameStarted" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="players" type="tns:ArrayOfPlayer" />
         </s:sequence>
       </s:complexType>
-      <s:element name="SaveState">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="appState" type="tns:AppState" />
-            <s:element minOccurs="0" maxOccurs="1" name="sessionName" type="s:string" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="SaveStateResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="SaveStateResult" type="s:string" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
+      <s:complexType name="ArrayOfPlayer">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Player" nillable="true" type="tns:Player" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Player">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="cards" type="tns:ArrayOfCard" />
+          <s:element minOccurs="1" maxOccurs="1" name="isCreator" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCard">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Card" nillable="true" type="tns:Card" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Card">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="color" type="tns:CardColor" />
+          <s:element minOccurs="1" maxOccurs="1" name="type" type="tns:CardType" />
+          <s:element minOccurs="1" maxOccurs="1" name="value" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="CardColor">
+        <s:restriction base="s:string">
+          <s:enumeration value="Undefined" />
+          <s:enumeration value="Black" />
+          <s:enumeration value="Red" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="CardType">
+        <s:restriction base="s:string">
+          <s:enumeration value="Undefined" />
+          <s:enumeration value="Type1" />
+          <s:enumeration value="Type2" />
+          <s:enumeration value="Type3" />
+          <s:enumeration value="Type4" />
+        </s:restriction>
+      </s:simpleType>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="RegisterSessionSoapIn">
@@ -55,30 +95,30 @@
   <wsdl:message name="RegisterSessionSoapOut">
     <wsdl:part name="parameters" element="tns:RegisterSessionResponse" />
   </wsdl:message>
+  <wsdl:message name="JoinSessionSoapIn">
+    <wsdl:part name="parameters" element="tns:JoinSession" />
+  </wsdl:message>
+  <wsdl:message name="JoinSessionSoapOut">
+    <wsdl:part name="parameters" element="tns:JoinSessionResponse" />
+  </wsdl:message>
   <wsdl:message name="GetStateSoapIn">
     <wsdl:part name="parameters" element="tns:GetState" />
   </wsdl:message>
   <wsdl:message name="GetStateSoapOut">
     <wsdl:part name="parameters" element="tns:GetStateResponse" />
   </wsdl:message>
-  <wsdl:message name="SaveStateSoapIn">
-    <wsdl:part name="parameters" element="tns:SaveState" />
-  </wsdl:message>
-  <wsdl:message name="SaveStateSoapOut">
-    <wsdl:part name="parameters" element="tns:SaveStateResponse" />
-  </wsdl:message>
   <wsdl:portType name="WebServiceSoap">
     <wsdl:operation name="RegisterSession">
       <wsdl:input message="tns:RegisterSessionSoapIn" />
       <wsdl:output message="tns:RegisterSessionSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="JoinSession">
+      <wsdl:input message="tns:JoinSessionSoapIn" />
+      <wsdl:output message="tns:JoinSessionSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="GetState">
       <wsdl:input message="tns:GetStateSoapIn" />
       <wsdl:output message="tns:GetStateSoapOut" />
-    </wsdl:operation>
-    <wsdl:operation name="SaveState">
-      <wsdl:input message="tns:SaveStateSoapIn" />
-      <wsdl:output message="tns:SaveStateSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WebServiceSoap" type="tns:WebServiceSoap">
@@ -92,8 +132,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetState">
-      <soap:operation soapAction="http://tempuri.org/GetState" style="document" />
+    <wsdl:operation name="JoinSession">
+      <soap:operation soapAction="http://tempuri.org/JoinSession" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -101,8 +141,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="SaveState">
-      <soap:operation soapAction="http://tempuri.org/SaveState" style="document" />
+    <wsdl:operation name="GetState">
+      <soap:operation soapAction="http://tempuri.org/GetState" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -122,8 +162,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetState">
-      <soap12:operation soapAction="http://tempuri.org/GetState" style="document" />
+    <wsdl:operation name="JoinSession">
+      <soap12:operation soapAction="http://tempuri.org/JoinSession" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -131,8 +171,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="SaveState">
-      <soap12:operation soapAction="http://tempuri.org/SaveState" style="document" />
+    <wsdl:operation name="GetState">
+      <soap12:operation soapAction="http://tempuri.org/GetState" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

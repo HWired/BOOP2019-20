@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Client.PrsiService;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,18 +19,19 @@ namespace Client.Networking
             client = new PrsiService.WebServiceSoapClient();
         }
 
-        public void CreateSession ()
+        public void CreateSession (string playerName)
         {
-            SessionManager.sessionName = client.RegisterSession();
+            SessionManager.sessionName = client.RegisterSession(playerName);
             SessionManager.appState = client.GetState(SessionManager.sessionName);
 
             Console.WriteLine("SESSION CODE: " + SessionManager.sessionName + ", SHARE THIS WITH YOUR FRIENDS!");
         }
 
-        public void JoinSession (string sessionName)
+        public void JoinSession (string sessionName, string playerName)
         {
             SessionManager.sessionName = sessionName;
-            SessionManager.appState = client.GetState(SessionManager.sessionName);
+
+            client.JoinSession(SessionManager.sessionName, playerName);
 
             if (SessionManager.appState != null)
                 Console.WriteLine("Connected to session: " + SessionManager.sessionName);
@@ -39,15 +41,12 @@ namespace Client.Networking
         {
             SessionManager.appState = client.GetState(SessionManager.sessionName);
             Console.WriteLine("=== APP STATE ===");
-            Console.WriteLine("integer: " + SessionManager.appState.integer);
-            Console.WriteLine("str: " + SessionManager.appState.str);
-        }
-
-        public void SaveState()
-        {
-            SessionManager.appState.integer += 1000;
-            SessionManager.appState.str += "str, ";
-            Console.WriteLine(client.SaveState(SessionManager.appState, SessionManager.sessionName));
+            Console.WriteLine("game started: " + SessionManager.appState.gameStarted);
+            Console.WriteLine("players: ");
+            foreach (Player player in SessionManager.appState.players)
+            {
+                Console.WriteLine("Player: " + player.name + ", isCreator: " + player.isCreator);
+            }
         }
     }
 }

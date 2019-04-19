@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Server.Common;
+using Server.DataStructures;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,23 +18,47 @@ namespace Server
     // [System.Web.Script.Services.ScriptService]
     public class WebService : System.Web.Services.WebService
     {
-        public struct AppState {
-            public int integer;
-            public string str;
+        [WebMethod]
+        public string RegisterSession (string playerName)
+        {
+            string sessionName = RandomString.Generate(5);
+            AppState appState = CreateState(sessionName);
+            AddPlayer(appState, playerName, true);
+
+            return sessionName;
         }
 
         [WebMethod]
-        public string RegisterSession ()
+        public void JoinSession (string sessionName, string playerName)
         {
-            string sessionName = RandomString(5);
+            AppState appState = GetState(sessionName);
+            AddPlayer(appState, playerName, false);
+        }
 
-            Application[sessionName] = new AppState()
-            {
-                integer = 0,
-                str = ""
-            };
+        public void LeaveSession (string sessionName, string playerName)
+        {
+            AppState appState = GetState(sessionName);
+            RemovePlayer(appState, playerName);
+        }
 
-            return sessionName;
+        private void AddPlayer(AppState appState, string playerName, bool isCreator)
+        {
+            Player newPlayer = new Player();
+            newPlayer.SetName(playerName);
+            newPlayer.SetCreator(isCreator);
+            appState.players.Add(newPlayer);
+        }
+
+        private void RemovePlayer(AppState appState, string playerName)
+        {
+            Player player = appState.players.Find(p => p.name == playerName);
+            appState.players.Remove(player);
+        }
+
+        private AppState CreateState(string sessionName)
+        {
+            Application[sessionName] = new AppState();
+            return (AppState)Application[sessionName];
         }
 
         [WebMethod]
@@ -41,23 +67,12 @@ namespace Server
             return (AppState)Application[sessionName];
         }
 
-        [WebMethod]
-        public string SaveState (AppState appState, string sessionName)
+        private bool SaveState (AppState appState, string sessionName)
         {
             Application[sessionName] = appState;
 
-            if (Application[sessionName] != null)
-                return "Data saved";
-            else
-                return "Data not saved";
-        }
-        
-        private static Random random = new Random();
-        private string RandomString (int length)
-        {
-            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            return new string(Enumerable.Repeat(chars, length)
-              .Select(s => s[random.Next(s.Length)]).ToArray());
+            if (Application[sessionName] != null) return true;
+            else return false;
         }
     }
 }

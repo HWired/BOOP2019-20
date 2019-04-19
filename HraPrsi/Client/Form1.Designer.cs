@@ -33,7 +33,8 @@
             this.SessionCodeLabel = new System.Windows.Forms.Label();
             this.JoinGameBtn = new System.Windows.Forms.Button();
             this.GetStateBtn = new System.Windows.Forms.Button();
-            this.UpdateStateBtn = new System.Windows.Forms.Button();
+            this.UserNameLabel = new System.Windows.Forms.Label();
+            this.UserNameInput = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // NewGameBtn
@@ -48,7 +49,7 @@
             // 
             // SessionCodeInput
             // 
-            this.SessionCodeInput.Location = new System.Drawing.Point(89, 47);
+            this.SessionCodeInput.Location = new System.Drawing.Point(89, 68);
             this.SessionCodeInput.Name = "SessionCodeInput";
             this.SessionCodeInput.Size = new System.Drawing.Size(168, 20);
             this.SessionCodeInput.TabIndex = 1;
@@ -56,7 +57,7 @@
             // SessionCodeLabel
             // 
             this.SessionCodeLabel.AutoSize = true;
-            this.SessionCodeLabel.Location = new System.Drawing.Point(12, 50);
+            this.SessionCodeLabel.Location = new System.Drawing.Point(12, 71);
             this.SessionCodeLabel.Name = "SessionCodeLabel";
             this.SessionCodeLabel.Size = new System.Drawing.Size(71, 13);
             this.SessionCodeLabel.TabIndex = 2;
@@ -74,7 +75,7 @@
             // 
             // GetStateBtn
             // 
-            this.GetStateBtn.Location = new System.Drawing.Point(15, 73);
+            this.GetStateBtn.Location = new System.Drawing.Point(15, 94);
             this.GetStateBtn.Name = "GetStateBtn";
             this.GetStateBtn.Size = new System.Drawing.Size(119, 23);
             this.GetStateBtn.TabIndex = 4;
@@ -82,22 +83,29 @@
             this.GetStateBtn.UseVisualStyleBackColor = true;
             this.GetStateBtn.Click += new System.EventHandler(this.GetStateBtn_Click);
             // 
-            // UpdateStateBtn
+            // UserNameLabel
             // 
-            this.UpdateStateBtn.Location = new System.Drawing.Point(140, 73);
-            this.UpdateStateBtn.Name = "UpdateStateBtn";
-            this.UpdateStateBtn.Size = new System.Drawing.Size(119, 23);
-            this.UpdateStateBtn.TabIndex = 5;
-            this.UpdateStateBtn.Text = "Update state";
-            this.UpdateStateBtn.UseVisualStyleBackColor = true;
-            this.UpdateStateBtn.Click += new System.EventHandler(this.UpdateStateBtn_Click);
+            this.UserNameLabel.AutoSize = true;
+            this.UserNameLabel.Location = new System.Drawing.Point(12, 45);
+            this.UserNameLabel.Name = "UserNameLabel";
+            this.UserNameLabel.Size = new System.Drawing.Size(65, 13);
+            this.UserNameLabel.TabIndex = 6;
+            this.UserNameLabel.Text = "Player name";
+            // 
+            // UserNameInput
+            // 
+            this.UserNameInput.Location = new System.Drawing.Point(89, 42);
+            this.UserNameInput.Name = "UserNameInput";
+            this.UserNameInput.Size = new System.Drawing.Size(168, 20);
+            this.UserNameInput.TabIndex = 5;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.UpdateStateBtn);
+            this.Controls.Add(this.UserNameLabel);
+            this.Controls.Add(this.UserNameInput);
             this.Controls.Add(this.GetStateBtn);
             this.Controls.Add(this.JoinGameBtn);
             this.Controls.Add(this.SessionCodeLabel);
@@ -117,7 +125,8 @@
         private System.Windows.Forms.Label SessionCodeLabel;
         private System.Windows.Forms.Button JoinGameBtn;
         private System.Windows.Forms.Button GetStateBtn;
-        private System.Windows.Forms.Button UpdateStateBtn;
+        private System.Windows.Forms.Label UserNameLabel;
+        private System.Windows.Forms.TextBox UserNameInput;
     }
 }
 

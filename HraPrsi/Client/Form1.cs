@@ -25,24 +25,21 @@ namespace Client
 
         private void NewGameBtn_Click(object sender, EventArgs e)
         {
-            sessionManager.CreateSession();
+            string playerName = UserNameInput.Text;
+            sessionManager.CreateSession(playerName);
             SessionCodeInput.Text = SessionManager.sessionName;
         }
 
         private void JoinGameBtn_Click(object sender, EventArgs e)
         {
             string sessionName = SessionCodeInput.Text;
-            sessionManager.JoinSession(sessionName);
+            string playerName = UserNameInput.Text;
+            sessionManager.JoinSession(sessionName, playerName);
         }
 
         private void GetStateBtn_Click(object sender, EventArgs e)
         {
             sessionManager.LoadState();
-        }
-
-        private void UpdateStateBtn_Click(object sender, EventArgs e)
-        {
-            sessionManager.SaveState();
         }
     }
 }

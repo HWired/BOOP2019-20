@@ -99,6 +99,7 @@ namespace Server
                 if (CardCanBePlayed(appState, player, card))
                 {
 
+                    NextPlayer(sessionName, appState);
                 }
             }
         }
@@ -117,6 +118,13 @@ namespace Server
                 return true;
 
             return false;
+        }
+
+        private void NextPlayer (string sessionName, AppState appState)
+        {
+            appState.playerTurn += 1;
+            appState.playerTurn = appState.playerTurn % appState.players.Count;
+            SaveState(appState, sessionName);
         }
     }
 }

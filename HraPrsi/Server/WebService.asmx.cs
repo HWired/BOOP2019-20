@@ -143,6 +143,18 @@ namespace Server
             SaveState(appState, sessionName);
         }
 
+        [WebMethod]
+        private void SkipTurn (string sessionName, string playerName)
+        {
+            AppState appState = GetState(sessionName);
+            Player player = appState.players.Find(p => p.name == playerName);
 
+            if (IsPlayersTurn(appState, player))
+            {
+                appState.players.ElementAt(appState.playerTurn).cards.Add(appState.cardStack.ElementAt(0));
+                appState.cardStack.RemoveAt(0);
+                SaveState(appState, sessionName);
+            }
+        }
     }
 }

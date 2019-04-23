@@ -75,6 +75,7 @@ namespace Server
             else return false;
         }
 
+        [WebMethod]
         public void StartGame (string sessionName, string playerName)
         {
             AppState appState = GetState(sessionName);
@@ -86,5 +87,6 @@ namespace Server
 
             SaveState(appState, sessionName);
         }
+        
     }
 }

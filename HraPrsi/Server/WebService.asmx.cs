@@ -98,8 +98,11 @@ namespace Server
             {
                 if (CardCanBePlayed(appState, player, card))
                 {
-
-                    NextPlayer(sessionName, appState);
+                    if (CheckCardWithRules(appState, card))
+                    {
+                        appState.topCardStackPlayed = card;
+                        NextPlayer(sessionName, appState);
+                    }
                 }
             }
         }
@@ -120,11 +123,26 @@ namespace Server
             return false;
         }
 
+        private bool CheckCardWithRules (AppState appState, Card card)
+        {
+            // Same color? Pass
+            if (appState.topCardStackPlayed.color == card.color && card.value != CardValue.CA)
+                return true;
+
+            // Same value? Pass
+            if (appState.topCardStackPlayed.value == card.value)
+                return true;
+
+            return false;
+        }
+
         private void NextPlayer (string sessionName, AppState appState)
         {
             appState.playerTurn += 1;
             appState.playerTurn = appState.playerTurn % appState.players.Count;
             SaveState(appState, sessionName);
         }
+
+
     }
 }

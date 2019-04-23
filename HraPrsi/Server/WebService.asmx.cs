@@ -74,5 +74,17 @@ namespace Server
             if (Application[sessionName] != null) return true;
             else return false;
         }
+
+        public void StartGame (string sessionName, string playerName)
+        {
+            AppState appState = GetState(sessionName);
+
+            Player player = appState.players.Find(p => p.name == playerName);
+
+            if (player.isCreator)
+                appState.gameStarted = true;
+
+            SaveState(appState, sessionName);
+        }
     }
 }

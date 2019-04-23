@@ -96,7 +96,10 @@ namespace Server
 
             if (IsPlayersTurn(appState, player))
             {
+                if (CardCanBePlayed(appState, player, card))
+                {
 
+                }
             }
         }
 
@@ -108,5 +111,12 @@ namespace Server
             return false;
         }
 
+        private bool CardCanBePlayed (AppState appState, Player player, Card card)
+        {
+            if (player.cards.Contains(card))
+                return true;
+
+            return false;
+        }
     }
 }

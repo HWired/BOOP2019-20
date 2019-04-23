@@ -4,3 +4,7 @@ Naprogramujte GUI aplikaci, která bude sloužit jako klient a bude se připojov
 
 ## Poznámky
 Využijte maximálně možnosti OOP, neduplikujte kód, používejte přehledný styl zápisu kódu a vhodné pojmenování tříd a členů.
+
+## Pravidla
+Implementována tato verze (nevím jak se jmenuje - je to něco jednoduššího)
+https://www.youtube.com/watch?v=0TVE7JxHmmY

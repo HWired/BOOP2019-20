@@ -88,5 +88,25 @@ namespace Server
             SaveState(appState, sessionName);
         }
         
+        [WebMethod]
+        public void PlayCard (string sessionName, string playerName, Card card)
+        {
+            AppState appState = GetState(sessionName);
+            Player player = appState.players.Find(p => p.name == playerName);
+
+            if (IsPlayersTurn(appState, player))
+            {
+
+            }
+        }
+
+        private bool IsPlayersTurn (AppState appState, Player player)
+        {
+            if (appState.playerTurn % player.order == 0)
+                return true;
+
+            return false;
+        }
+
     }
 }

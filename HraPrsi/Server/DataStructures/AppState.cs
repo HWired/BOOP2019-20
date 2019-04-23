@@ -6,5 +6,7 @@ namespace Server.DataStructures
     {
         public bool gameStarted = false;
         public List<Player> players = new List<Player>();
+
+        public int playerTurn = 0;
     }
 }

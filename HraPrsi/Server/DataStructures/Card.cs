@@ -4,6 +4,6 @@
     {
         public CardColor color = CardColor.Undefined;
         public CardType type = CardType.Undefined;
-        public int value = 0;
+        public CardValue value = CardValue.Undefined;
     }
 }

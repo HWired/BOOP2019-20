@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Karta.cs" />
     <Compile Include="Connected Services\PrsiService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -59,11 +60,20 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI.Designer.cs">
+      <DependentUpon>GUI.cs</DependentUpon>
+    </Compile>
     <Compile Include="Networking\SessionManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI.resx">
+      <DependentUpon>GUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -73,6 +83,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Connected Services\PrsiService\Client.PrsiService.AppState.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -121,6 +132,63 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\TestKarty.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\KartaBack.png" />
+    <Content Include="Resources\Kary10.png" />
+    <Content Include="Resources\Kary2.png" />
+    <Content Include="Resources\Kary3.png" />
+    <Content Include="Resources\Kary4.png" />
+    <Content Include="Resources\Kary5.png" />
+    <Content Include="Resources\Kary6.png" />
+    <Content Include="Resources\Kary7.png" />
+    <Content Include="Resources\Kary8.png" />
+    <Content Include="Resources\Kary9.png" />
+    <Content Include="Resources\KaryA.png" />
+    <Content Include="Resources\KaryJ.png" />
+    <Content Include="Resources\KaryK.png" />
+    <Content Include="Resources\KaryQ.png" />
+    <Content Include="Resources\Kriz10.png" />
+    <Content Include="Resources\Kriz2.png" />
+    <Content Include="Resources\Kriz3.png" />
+    <Content Include="Resources\Kriz4.png" />
+    <Content Include="Resources\Kriz5.png" />
+    <Content Include="Resources\Kriz6.png" />
+    <Content Include="Resources\Kriz7.png" />
+    <Content Include="Resources\Kriz8.png" />
+    <Content Include="Resources\Kriz9.png" />
+    <Content Include="Resources\KrizA.png" />
+    <Content Include="Resources\KrizJ.png" />
+    <Content Include="Resources\KrizK.png" />
+    <Content Include="Resources\KrizQ.png" />
+    <Content Include="Resources\Piki10.png" />
+    <Content Include="Resources\Piki2.png" />
+    <Content Include="Resources\Piki3.png" />
+    <Content Include="Resources\Piki4.png" />
+    <Content Include="Resources\Piki5.png" />
+    <Content Include="Resources\Piki6.png" />
+    <Content Include="Resources\Piki7.png" />
+    <Content Include="Resources\Piki8.png" />
+    <Content Include="Resources\Piki9.png" />
+    <Content Include="Resources\PikiA.png" />
+    <Content Include="Resources\PikiJ.png" />
+    <Content Include="Resources\PikiK.png" />
+    <Content Include="Resources\PikiQ.png" />
+    <Content Include="Resources\Srdce10.png" />
+    <Content Include="Resources\Srdce2.png" />
+    <Content Include="Resources\Srdce3.png" />
+    <Content Include="Resources\Srdce4.png" />
+    <Content Include="Resources\Srdce5.png" />
+    <Content Include="Resources\Srdce6.png" />
+    <Content Include="Resources\Srdce7.png" />
+    <Content Include="Resources\Srdce8.png" />
+    <Content Include="Resources\Srdce9.png" />
+    <Content Include="Resources\SrdceA.png" />
+    <Content Include="Resources\SrdceJ.png" />
+    <Content Include="Resources\SrdceK.png" />
+    <Content Include="Resources\SrdceQ.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

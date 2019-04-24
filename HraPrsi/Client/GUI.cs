@@ -15,26 +15,20 @@ namespace Client
     {
         bool ulozenikarty = false;
         PictureBox predeslaKarta = null;
+        PictureBox vybranakarta = null;
         public GUI()
         {
             InitializeComponent();
         }
 
-        private void pictureBox2_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void Hrajkartu_Click(object sender, EventArgs e)
         {
-            
-
-            
-        }
-        private void SelectCard()
-        {
+            OdlozenaKarta.Image = vybranakarta.Image;
+            vybranakarta.Visible = false;
+            vybranakarta.Image = null;
 
         }
+     
 
         private void Tahnikartu_Click(object sender, EventArgs e)
         {
@@ -65,9 +59,8 @@ namespace Client
             }
             predeslaKarta = (PictureBox)sender;
             ulozenikarty = true;
-            var karta = (PictureBox)sender;
-            String nazev = karta.Name;
-            karta.Location = new Point(karta.Location.X,karta.Location.Y - 50);
+            vybranakarta = (PictureBox)sender;
+            vybranakarta.Location = new Point(vybranakarta.Location.X, vybranakarta.Location.Y - 50);
 
         }
     }

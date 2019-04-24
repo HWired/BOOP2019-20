@@ -463,6 +463,16 @@ namespace Client.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap PrazdnaKarta {
+            get {
+                object obj = ResourceManager.GetObject("PrazdnaKarta", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Srdce10 {
             get {
                 object obj = ResourceManager.GetObject("Srdce10", resourceCulture);

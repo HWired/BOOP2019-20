@@ -14,9 +14,12 @@ namespace Client
     public partial class GUI : Form
     {
         bool ulozenikarty = false;
+        bool kartaRozdana = false ;
         PictureBox predeslaKarta = null;
         PictureBox vybranakarta = null;
         Bitmap[,] hraciKarty = new Bitmap [4,13];
+        Bitmap obrazek;
+
         public GUI()
         {
             InitializeComponent();
@@ -28,6 +31,7 @@ namespace Client
             OdlozenaKarta.Image = vybranakarta.Image;
             vybranakarta.Visible = false;
             vybranakarta.Image = null;
+            
 
         }
      
@@ -35,9 +39,27 @@ namespace Client
         private void Tahnikartu_Click(object sender, EventArgs e)
         {
            
-            Bitmap obrazek = new Bitmap(Nahraj(0,1));
-            Karta1.Image = (Image)obrazek;
-          
+            kartaRozdana = false;
+            obrazek = new Bitmap(Nahraj(0,1));
+            daniKarty(Karta1);
+            daniKarty(Karta2);
+            daniKarty(Karta3);
+            daniKarty(Karta4);
+            daniKarty(Karta5);
+            daniKarty(Karta6);
+            daniKarty(Karta7);
+            daniKarty(Karta8);
+            daniKarty(Karta9);
+            daniKarty(Karta10);
+            daniKarty(pictureBox1);
+            daniKarty(pictureBox2);
+            daniKarty(pictureBox3);
+            daniKarty(pictureBox4);
+            daniKarty(pictureBox5);
+            daniKarty(pictureBox6);
+            daniKarty(pictureBox7);
+            daniKarty(pictureBox8);
+            
         }
 
         private void Nahraj()
@@ -130,6 +152,18 @@ namespace Client
             vybranakarta = (PictureBox)sender;
             vybranakarta.Location = new Point(vybranakarta.Location.X, vybranakarta.Location.Y - 50);
 
+        }
+
+        private void daniKarty(PictureBox karta)
+        {
+
+
+            if(karta.Visible == false && kartaRozdana == false)
+            {
+                karta.Image = (Image)obrazek;
+                karta.Visible = true;
+                kartaRozdana = true;
+            }
         }
     }
 }

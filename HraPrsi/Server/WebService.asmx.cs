@@ -143,7 +143,7 @@ namespace Server
         }
 
         [WebMethod]
-        private void SkipTurn (string sessionName, string playerName)
+        public void SkipTurn (string sessionName, string playerName)
         {
             LoadSession(sessionName);
 

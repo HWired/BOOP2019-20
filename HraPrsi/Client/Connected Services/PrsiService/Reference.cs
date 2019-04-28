@@ -409,6 +409,13 @@ namespace Client.PrsiService {
         System.Threading.Tasks.Task<Client.PrsiService.PlayCardResponse> PlayCardAsync(Client.PrsiService.PlayCardRequest request);
         
         // CODEGEN: Generating message contract since element name sessionName from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SkipTurn", ReplyAction="*")]
+        Client.PrsiService.SkipTurnResponse SkipTurn(Client.PrsiService.SkipTurnRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SkipTurn", ReplyAction="*")]
+        System.Threading.Tasks.Task<Client.PrsiService.SkipTurnResponse> SkipTurnAsync(Client.PrsiService.SkipTurnRequest request);
+        
+        // CODEGEN: Generating message contract since element name sessionName from namespace http://tempuri.org/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetState", ReplyAction="*")]
         Client.PrsiService.GetStateResponse GetState(Client.PrsiService.GetStateRequest request);
         
@@ -752,6 +759,71 @@ namespace Client.PrsiService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SkipTurnRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SkipTurn", Namespace="http://tempuri.org/", Order=0)]
+        public Client.PrsiService.SkipTurnRequestBody Body;
+        
+        public SkipTurnRequest() {
+        }
+        
+        public SkipTurnRequest(Client.PrsiService.SkipTurnRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SkipTurnRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string sessionName;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public string playerName;
+        
+        public SkipTurnRequestBody() {
+        }
+        
+        public SkipTurnRequestBody(string sessionName, string playerName) {
+            this.sessionName = sessionName;
+            this.playerName = playerName;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SkipTurnResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SkipTurnResponse", Namespace="http://tempuri.org/", Order=0)]
+        public Client.PrsiService.SkipTurnResponseBody Body;
+        
+        public SkipTurnResponse() {
+        }
+        
+        public SkipTurnResponse(Client.PrsiService.SkipTurnResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute()]
+    public partial class SkipTurnResponseBody {
+        
+        public SkipTurnResponseBody() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
     public partial class GetStateRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="GetState", Namespace="http://tempuri.org/", Order=0)]
@@ -972,6 +1044,32 @@ namespace Client.PrsiService {
             inValue.Body.playerName = playerName;
             inValue.Body.card = card;
             return ((Client.PrsiService.WebServiceSoap)(this)).PlayCardAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Client.PrsiService.SkipTurnResponse Client.PrsiService.WebServiceSoap.SkipTurn(Client.PrsiService.SkipTurnRequest request) {
+            return base.Channel.SkipTurn(request);
+        }
+        
+        public void SkipTurn(string sessionName, string playerName) {
+            Client.PrsiService.SkipTurnRequest inValue = new Client.PrsiService.SkipTurnRequest();
+            inValue.Body = new Client.PrsiService.SkipTurnRequestBody();
+            inValue.Body.sessionName = sessionName;
+            inValue.Body.playerName = playerName;
+            Client.PrsiService.SkipTurnResponse retVal = ((Client.PrsiService.WebServiceSoap)(this)).SkipTurn(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Client.PrsiService.SkipTurnResponse> Client.PrsiService.WebServiceSoap.SkipTurnAsync(Client.PrsiService.SkipTurnRequest request) {
+            return base.Channel.SkipTurnAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Client.PrsiService.SkipTurnResponse> SkipTurnAsync(string sessionName, string playerName) {
+            Client.PrsiService.SkipTurnRequest inValue = new Client.PrsiService.SkipTurnRequest();
+            inValue.Body = new Client.PrsiService.SkipTurnRequestBody();
+            inValue.Body.sessionName = sessionName;
+            inValue.Body.playerName = playerName;
+            return ((Client.PrsiService.WebServiceSoap)(this)).SkipTurnAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]

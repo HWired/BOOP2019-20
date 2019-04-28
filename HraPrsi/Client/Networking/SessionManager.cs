@@ -17,6 +17,8 @@ namespace Client.Networking
         private PrsiService.WebServiceSoapClient service;
         private Timer netSyncTimer;
 
+        private string myName;
+
         public SessionManager ()
         {
             service = new PrsiService.WebServiceSoapClient();
@@ -24,6 +26,8 @@ namespace Client.Networking
 
         public void CreateSession (string playerName)
         {
+            myName = playerName;
+
             SessionManager.sessionName = service.RegisterSession(playerName);
             SessionManager.appState = service.GetState(SessionManager.sessionName);
 
@@ -40,6 +44,7 @@ namespace Client.Networking
 
             if (SessionManager.appState != null)
             {
+                myName = playerName;
                 Console.WriteLine("Connected to session: " + SessionManager.sessionName);
                 SetNetworkStateTimer();
             } 
@@ -113,12 +118,26 @@ namespace Client.Networking
         private void OnTurnChanged (Player player, int playerIndex)
         {
             Console.WriteLine(player.name);
-            if (player.order == playerIndex)
+            if (player.order == playerIndex && player.name == myName)
             {
                 Console.WriteLine("My turn");
             }
 
             // update list of players (GUI)
+        }
+
+        /* zavolat, když chci hrát kartu
+         * sessionManager.PlayCard(SessionManager.appState.cardStack.ElementAt(3)); - z GUI.cs
+        */
+        private void PlayCard (Card card)
+        {
+            service.PlayCard(SessionManager.sessionName, myName, card);
+        }
+
+        // zavolat, když chci přeskočit můj tah
+        private void SkipTurn ()
+        {
+            service.SkipTurn(SessionManager.sessionName, myName);
         }
     }
 }

@@ -103,6 +103,9 @@
     <None Include="Connected Services\PrsiService\Client.PrsiService.RegisterSessionResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Connected Services\PrsiService\Client.PrsiService.SkipTurnResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\PrsiService\Client.PrsiService.StartGameResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

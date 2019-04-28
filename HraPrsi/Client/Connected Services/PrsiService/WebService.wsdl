@@ -27,6 +27,82 @@
       <s:element name="JoinSessionResponse">
         <s:complexType />
       </s:element>
+      <s:element name="LeaveSession">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="playerName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LeaveSessionResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="StartGame">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="playerName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="StartGameResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="PlayCard">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="playerName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="card" type="tns:Card" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Card">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="color" type="tns:CardColor" />
+          <s:element minOccurs="1" maxOccurs="1" name="type" type="tns:CardType" />
+          <s:element minOccurs="1" maxOccurs="1" name="value" type="tns:CardValue" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="CardColor">
+        <s:restriction base="s:string">
+          <s:enumeration value="Undefined" />
+          <s:enumeration value="Black" />
+          <s:enumeration value="Red" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="CardType">
+        <s:restriction base="s:string">
+          <s:enumeration value="Undefined" />
+          <s:enumeration value="Heart" />
+          <s:enumeration value="Diamond" />
+          <s:enumeration value="Leaf" />
+          <s:enumeration value="Acorn" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="CardValue">
+        <s:restriction base="s:string">
+          <s:enumeration value="Undefined" />
+          <s:enumeration value="C1" />
+          <s:enumeration value="C2" />
+          <s:enumeration value="C3" />
+          <s:enumeration value="C4" />
+          <s:enumeration value="C5" />
+          <s:enumeration value="C6" />
+          <s:enumeration value="C7" />
+          <s:enumeration value="C8" />
+          <s:enumeration value="C9" />
+          <s:enumeration value="C10" />
+          <s:enumeration value="CJ" />
+          <s:enumeration value="CQ" />
+          <s:enumeration value="CK" />
+          <s:enumeration value="CA" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="PlayCardResponse">
+        <s:complexType />
+      </s:element>
       <s:element name="GetState">
         <s:complexType>
           <s:sequence>
@@ -43,8 +119,11 @@
       </s:element>
       <s:complexType name="AppState">
         <s:sequence>
-          <s:element minOccurs="1" maxOccurs="1" name="gameStarted" type="s:boolean" />
           <s:element minOccurs="0" maxOccurs="1" name="players" type="tns:ArrayOfPlayer" />
+          <s:element minOccurs="0" maxOccurs="1" name="cardStack" type="tns:ArrayOfCard" />
+          <s:element minOccurs="0" maxOccurs="1" name="topCardStackPlayed" type="tns:Card" />
+          <s:element minOccurs="1" maxOccurs="1" name="gameStarted" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="playerTurn" type="s:int" />
         </s:sequence>
       </s:complexType>
       <s:complexType name="ArrayOfPlayer">
@@ -57,6 +136,7 @@
           <s:element minOccurs="0" maxOccurs="1" name="name" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="cards" type="tns:ArrayOfCard" />
           <s:element minOccurs="1" maxOccurs="1" name="isCreator" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="order" type="s:int" />
         </s:sequence>
       </s:complexType>
       <s:complexType name="ArrayOfCard">
@@ -64,29 +144,6 @@
           <s:element minOccurs="0" maxOccurs="unbounded" name="Card" nillable="true" type="tns:Card" />
         </s:sequence>
       </s:complexType>
-      <s:complexType name="Card">
-        <s:sequence>
-          <s:element minOccurs="1" maxOccurs="1" name="color" type="tns:CardColor" />
-          <s:element minOccurs="1" maxOccurs="1" name="type" type="tns:CardType" />
-          <s:element minOccurs="1" maxOccurs="1" name="value" type="s:int" />
-        </s:sequence>
-      </s:complexType>
-      <s:simpleType name="CardColor">
-        <s:restriction base="s:string">
-          <s:enumeration value="Undefined" />
-          <s:enumeration value="Black" />
-          <s:enumeration value="Red" />
-        </s:restriction>
-      </s:simpleType>
-      <s:simpleType name="CardType">
-        <s:restriction base="s:string">
-          <s:enumeration value="Undefined" />
-          <s:enumeration value="Type1" />
-          <s:enumeration value="Type2" />
-          <s:enumeration value="Type3" />
-          <s:enumeration value="Type4" />
-        </s:restriction>
-      </s:simpleType>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="RegisterSessionSoapIn">
@@ -100,6 +157,24 @@
   </wsdl:message>
   <wsdl:message name="JoinSessionSoapOut">
     <wsdl:part name="parameters" element="tns:JoinSessionResponse" />
+  </wsdl:message>
+  <wsdl:message name="LeaveSessionSoapIn">
+    <wsdl:part name="parameters" element="tns:LeaveSession" />
+  </wsdl:message>
+  <wsdl:message name="LeaveSessionSoapOut">
+    <wsdl:part name="parameters" element="tns:LeaveSessionResponse" />
+  </wsdl:message>
+  <wsdl:message name="StartGameSoapIn">
+    <wsdl:part name="parameters" element="tns:StartGame" />
+  </wsdl:message>
+  <wsdl:message name="StartGameSoapOut">
+    <wsdl:part name="parameters" element="tns:StartGameResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlayCardSoapIn">
+    <wsdl:part name="parameters" element="tns:PlayCard" />
+  </wsdl:message>
+  <wsdl:message name="PlayCardSoapOut">
+    <wsdl:part name="parameters" element="tns:PlayCardResponse" />
   </wsdl:message>
   <wsdl:message name="GetStateSoapIn">
     <wsdl:part name="parameters" element="tns:GetState" />
@@ -115,6 +190,18 @@
     <wsdl:operation name="JoinSession">
       <wsdl:input message="tns:JoinSessionSoapIn" />
       <wsdl:output message="tns:JoinSessionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LeaveSession">
+      <wsdl:input message="tns:LeaveSessionSoapIn" />
+      <wsdl:output message="tns:LeaveSessionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="StartGame">
+      <wsdl:input message="tns:StartGameSoapIn" />
+      <wsdl:output message="tns:StartGameSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PlayCard">
+      <wsdl:input message="tns:PlayCardSoapIn" />
+      <wsdl:output message="tns:PlayCardSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="GetState">
       <wsdl:input message="tns:GetStateSoapIn" />
@@ -134,6 +221,33 @@
     </wsdl:operation>
     <wsdl:operation name="JoinSession">
       <soap:operation soapAction="http://tempuri.org/JoinSession" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LeaveSession">
+      <soap:operation soapAction="http://tempuri.org/LeaveSession" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StartGame">
+      <soap:operation soapAction="http://tempuri.org/StartGame" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PlayCard">
+      <soap:operation soapAction="http://tempuri.org/PlayCard" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -164,6 +278,33 @@
     </wsdl:operation>
     <wsdl:operation name="JoinSession">
       <soap12:operation soapAction="http://tempuri.org/JoinSession" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LeaveSession">
+      <soap12:operation soapAction="http://tempuri.org/LeaveSession" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StartGame">
+      <soap12:operation soapAction="http://tempuri.org/StartGame" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PlayCard">
+      <soap12:operation soapAction="http://tempuri.org/PlayCard" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

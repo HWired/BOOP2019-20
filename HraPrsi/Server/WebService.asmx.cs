@@ -18,12 +18,18 @@ namespace Server
     // [System.Web.Script.Services.ScriptService]
     public class WebService : System.Web.Services.WebService
     {
+        private AppState appState;
+        private string sessionName;
+
         [WebMethod]
         public string RegisterSession (string playerName)
         {
             string sessionName = RandomString.Generate(5);
-            AppState appState = CreateState(sessionName);
-            AddPlayer(appState, playerName, true);
+            CreateState(sessionName);
+
+            LoadSession(sessionName);
+            AddPlayer(playerName, true);
+            SaveSession(sessionName);
 
             return sessionName;
         }
@@ -31,83 +37,77 @@ namespace Server
         [WebMethod]
         public void JoinSession (string sessionName, string playerName)
         {
-            AppState appState = GetState(sessionName);
-            AddPlayer(appState, playerName, false);
+            LoadSession(sessionName);
+
+            AddPlayer(playerName, false);
+
+            SaveSession(sessionName);
         }
 
+        [WebMethod]
         public void LeaveSession (string sessionName, string playerName)
         {
-            AppState appState = GetState(sessionName);
-            RemovePlayer(appState, playerName);
+            LoadSession(sessionName);
+
+            RemovePlayer(playerName);
+
+            SaveSession(sessionName);
         }
 
-        private void AddPlayer(AppState appState, string playerName, bool isCreator)
+        private void AddPlayer(string playerName, bool isCreator)
         {
             Player newPlayer = new Player();
+
             newPlayer.SetName(playerName);
             newPlayer.SetCreator(isCreator);
+            newPlayer.SetOrder(appState.players.Count);
+
             appState.players.Add(newPlayer);
         }
 
-        private void RemovePlayer(AppState appState, string playerName)
+        private void RemovePlayer (string playerName)
         {
             Player player = appState.players.Find(p => p.name == playerName);
             appState.players.Remove(player);
         }
 
-        private AppState CreateState(string sessionName)
-        {
-            Application[sessionName] = new AppState();
-            return (AppState)Application[sessionName];
-        }
-
-        [WebMethod]
-        public AppState GetState (string sessionName)
-        {
-            return (AppState)Application[sessionName];
-        }
-
-        private bool SaveState (AppState appState, string sessionName)
-        {
-            Application[sessionName] = appState;
-
-            if (Application[sessionName] != null) return true;
-            else return false;
-        }
-
         [WebMethod]
         public void StartGame (string sessionName, string playerName)
         {
-            AppState appState = GetState(sessionName);
+            LoadSession(sessionName);
 
             Player player = appState.players.Find(p => p.name == playerName);
 
             if (player.isCreator)
                 appState.gameStarted = true;
 
-            SaveState(appState, sessionName);
+            SaveSession(sessionName);
         }
         
         [WebMethod]
         public void PlayCard (string sessionName, string playerName, Card card)
         {
-            AppState appState = GetState(sessionName);
+            LoadSession(sessionName);
+
             Player player = appState.players.Find(p => p.name == playerName);
 
-            if (IsPlayersTurn(appState, player))
+            if (IsPlayersTurn(player))
             {
-                if (CardCanBePlayed(appState, player, card))
+                if (CardCanBePlayed(player, card))
                 {
-                    if (CheckCardWithRules(appState, card))
+                    if (CheckCardWithRules(card))
                     {
                         appState.topCardStackPlayed = card;
-                        NextPlayer(sessionName, appState);
+                        player.cards.Remove(card);
+                        NextPlayer(sessionName);
+
+                        SaveSession(sessionName);
                     }
                 }
             }
         }
 
-        private bool IsPlayersTurn (AppState appState, Player player)
+        private bool IsPlayersTurn (Player player)
         {
             if (appState.playerTurn % player.order == 0)
                 return true;
@@ -115,7 +115,7 @@ namespace Server
             return false;
         }
 
-        private bool CardCanBePlayed (AppState appState, Player player, Card card)
+        private bool CardCanBePlayed (Player player, Card card)
         {
             if (player.cards.Contains(card))
                 return true;
@@ -123,7 +123,7 @@ namespace Server
             return false;
         }
 
-        private bool CheckCardWithRules (AppState appState, Card card)
+        private bool CheckCardWithRules (Card card)
         {
             // Same color? Pass
             if (appState.topCardStackPlayed.color == card.color && card.value != CardValue.CA)
@@ -136,25 +136,51 @@ namespace Server
             return false;
         }
 
-        private void NextPlayer (string sessionName, AppState appState)
+        private void NextPlayer (string sessionName)
         {
             appState.playerTurn += 1;
             appState.playerTurn = appState.playerTurn % appState.players.Count;
-            SaveState(appState, sessionName);
         }
 
         [WebMethod]
         private void SkipTurn (string sessionName, string playerName)
         {
-            AppState appState = GetState(sessionName);
+            LoadSession(sessionName);
+
             Player player = appState.players.Find(p => p.name == playerName);
 
-            if (IsPlayersTurn(appState, player))
+            if (IsPlayersTurn(player))
             {
                 appState.players.ElementAt(appState.playerTurn).cards.Add(appState.cardStack.ElementAt(0));
                 appState.cardStack.RemoveAt(0);
-                SaveState(appState, sessionName);
+
+                SaveSession(sessionName);
             }
+        }
+
+        private void LoadSession (string sessionName)
+        {
+            this.sessionName = sessionName;
+            appState = GetState(sessionName);
+        }
+
+        private void CreateState (string sessionName)
+        {
+            Application[sessionName] = new AppState();
+        }
+
+        [WebMethod]
+        public AppState GetState (string sessionName)
+        {
+            return (AppState)Application[sessionName];
+        }
+
+        private bool SaveSession (string sessionName)
+        {
+            Application[sessionName] = appState;
+
+            if (Application[sessionName] != null) return true;
+            else return false;
         }
     }
 }

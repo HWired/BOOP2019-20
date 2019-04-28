@@ -10,7 +10,12 @@ namespace Server.DataStructures
 
         public int order = -1;
 
-        public void SetCreator(bool isCreator)
+        public void SetOrder (int order)
+        {
+            this.order = order;
+        }
+
+        public void SetCreator (bool isCreator)
         {
             this.isCreator = isCreator;
         }

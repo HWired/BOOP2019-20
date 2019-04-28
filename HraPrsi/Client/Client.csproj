@@ -83,7 +83,16 @@
     <None Include="Connected Services\PrsiService\Client.PrsiService.JoinSessionResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Connected Services\PrsiService\Client.PrsiService.LeaveSessionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\PrsiService\Client.PrsiService.PlayCardResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\PrsiService\Client.PrsiService.RegisterSessionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\PrsiService\Client.PrsiService.StartGameResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\PrsiService\WebService.wsdl" />

@@ -60,7 +60,6 @@ namespace Client.Networking
         private void SetNetworkStateTimer()
         {
             netSyncTimer = new Timer(1000);
-            // Hook up the Elapsed event for the timer. 
             netSyncTimer.Elapsed += CheckNetState;
             netSyncTimer.AutoReset = true;
             netSyncTimer.Enabled = true;
@@ -72,7 +71,7 @@ namespace Client.Networking
 
             if (SessionManager.appState.players != lastAppState.players)
             {
-                OnPlayerCntChange(appState.players);
+                OnPlayersChanged(appState.players);
             }
 
             if (SessionManager.appState.gameStarted != lastAppState.gameStarted)
@@ -82,28 +81,44 @@ namespace Client.Networking
 
             if (SessionManager.appState.playerTurn != lastAppState.playerTurn)
             {
-                OnTurnChanged();
+                Player player = SessionManager.appState.players.ElementAt(SessionManager.appState.playerTurn);
+                OnTurnChanged(player, SessionManager.appState.playerTurn);
             }
 
             lastAppState = SessionManager.appState;
         }
 
-        // voláno při změně počtu hráčů
-        private void OnPlayerCntChange (PrsiService.Player[] players)
+        // voláno při změně počtu hráčů tj. někdo přišel / odešel
+        private void OnPlayersChanged (Player[] players)
         {
+            Console.WriteLine("Someone joined or leaved");
 
+            // update list of players (GUI)
         }
 
         // voláno při změně stavu hry (na začátku a na konci hry)
         private void OnGameStateChanged (bool gameStarted)
         {
-
+            if (gameStarted)
+            {
+                Console.WriteLine("Game just started");
+            }
+            else
+            {
+                Console.WriteLine("Game just ended");
+            }
         }
 
         // voláno potom co někdo táhne/přeskočí kartu
-        private void OnTurnChanged ()
+        private void OnTurnChanged (Player player, int playerIndex)
         {
+            Console.WriteLine(player.name);
+            if (player.order == playerIndex)
+            {
+                Console.WriteLine("My turn");
+            }
 
+            // update list of players (GUI)
         }
     }
 }

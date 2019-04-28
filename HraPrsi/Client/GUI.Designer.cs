@@ -73,7 +73,7 @@
             // Hrajkartu
             // 
             this.Hrajkartu.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.Hrajkartu.Location = new System.Drawing.Point(1329, 625);
+            this.Hrajkartu.Location = new System.Drawing.Point(1233, 625);
             this.Hrajkartu.Name = "Hrajkartu";
             this.Hrajkartu.Size = new System.Drawing.Size(125, 77);
             this.Hrajkartu.TabIndex = 1;
@@ -97,7 +97,7 @@
             this.Karta1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.Karta1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.Karta1.Image = global::Client.Properties.Resources.Kriz9;
-            this.Karta1.Location = new System.Drawing.Point(146, 508);
+            this.Karta1.Location = new System.Drawing.Point(98, 508);
             this.Karta1.Name = "Karta1";
             this.Karta1.Size = new System.Drawing.Size(154, 194);
             this.Karta1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -110,7 +110,7 @@
             this.OdlozenaKarta.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.OdlozenaKarta.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.OdlozenaKarta.Image = global::Client.Properties.Resources.Kary2;
-            this.OdlozenaKarta.Location = new System.Drawing.Point(648, 210);
+            this.OdlozenaKarta.Location = new System.Drawing.Point(600, 210);
             this.OdlozenaKarta.Name = "OdlozenaKarta";
             this.OdlozenaKarta.Size = new System.Drawing.Size(154, 194);
             this.OdlozenaKarta.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -122,7 +122,7 @@
             this.Karta2.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.Karta2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.Karta2.Image = global::Client.Properties.Resources.Kriz9;
-            this.Karta2.Location = new System.Drawing.Point(205, 508);
+            this.Karta2.Location = new System.Drawing.Point(157, 508);
             this.Karta2.Name = "Karta2";
             this.Karta2.Size = new System.Drawing.Size(154, 194);
             this.Karta2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -135,7 +135,7 @@
             this.Karta3.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.Karta3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.Karta3.Image = global::Client.Properties.Resources.Kriz9;
-            this.Karta3.Location = new System.Drawing.Point(264, 508);
+            this.Karta3.Location = new System.Drawing.Point(216, 508);
             this.Karta3.Name = "Karta3";
             this.Karta3.Size = new System.Drawing.Size(154, 194);
             this.Karta3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -148,7 +148,7 @@
             this.Karta4.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.Karta4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.Karta4.Image = global::Client.Properties.Resources.Kriz9;
-            this.Karta4.Location = new System.Drawing.Point(323, 508);
+            this.Karta4.Location = new System.Drawing.Point(275, 508);
             this.Karta4.Name = "Karta4";
             this.Karta4.Size = new System.Drawing.Size(154, 194);
             this.Karta4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -161,7 +161,7 @@
             this.Karta5.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.Karta5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.Karta5.Image = global::Client.Properties.Resources.Kriz9;
-            this.Karta5.Location = new System.Drawing.Point(383, 508);
+            this.Karta5.Location = new System.Drawing.Point(335, 508);
             this.Karta5.Name = "Karta5";
             this.Karta5.Size = new System.Drawing.Size(154, 194);
             this.Karta5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -174,7 +174,7 @@
             this.Karta6.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.Karta6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.Karta6.Image = global::Client.Properties.Resources.Kriz9;
-            this.Karta6.Location = new System.Drawing.Point(443, 508);
+            this.Karta6.Location = new System.Drawing.Point(395, 508);
             this.Karta6.Name = "Karta6";
             this.Karta6.Size = new System.Drawing.Size(154, 194);
             this.Karta6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -187,7 +187,7 @@
             this.Karta7.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.Karta7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.Karta7.Image = global::Client.Properties.Resources.Kriz9;
-            this.Karta7.Location = new System.Drawing.Point(502, 508);
+            this.Karta7.Location = new System.Drawing.Point(454, 508);
             this.Karta7.Name = "Karta7";
             this.Karta7.Size = new System.Drawing.Size(154, 194);
             this.Karta7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -200,7 +200,7 @@
             this.Karta8.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.Karta8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.Karta8.Image = global::Client.Properties.Resources.Kriz9;
-            this.Karta8.Location = new System.Drawing.Point(561, 508);
+            this.Karta8.Location = new System.Drawing.Point(513, 508);
             this.Karta8.Name = "Karta8";
             this.Karta8.Size = new System.Drawing.Size(154, 194);
             this.Karta8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -213,7 +213,7 @@
             this.Karta9.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.Karta9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.Karta9.Image = global::Client.Properties.Resources.Kriz9;
-            this.Karta9.Location = new System.Drawing.Point(621, 508);
+            this.Karta9.Location = new System.Drawing.Point(573, 508);
             this.Karta9.Name = "Karta9";
             this.Karta9.Size = new System.Drawing.Size(154, 194);
             this.Karta9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -226,7 +226,7 @@
             this.Karta10.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.Karta10.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.Karta10.Image = global::Client.Properties.Resources.Kriz9;
-            this.Karta10.Location = new System.Drawing.Point(680, 508);
+            this.Karta10.Location = new System.Drawing.Point(632, 508);
             this.Karta10.Name = "Karta10";
             this.Karta10.Size = new System.Drawing.Size(154, 194);
             this.Karta10.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -239,7 +239,7 @@
             this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.pictureBox1.Image = global::Client.Properties.Resources.Kriz9;
-            this.pictureBox1.Location = new System.Drawing.Point(740, 508);
+            this.pictureBox1.Location = new System.Drawing.Point(692, 508);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(154, 194);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -252,7 +252,7 @@
             this.pictureBox2.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.pictureBox2.Image = global::Client.Properties.Resources.Kriz9;
-            this.pictureBox2.Location = new System.Drawing.Point(799, 508);
+            this.pictureBox2.Location = new System.Drawing.Point(751, 508);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(154, 194);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -265,7 +265,7 @@
             this.pictureBox3.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.pictureBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.pictureBox3.Image = global::Client.Properties.Resources.Kriz9;
-            this.pictureBox3.Location = new System.Drawing.Point(859, 508);
+            this.pictureBox3.Location = new System.Drawing.Point(811, 508);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(154, 194);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -278,7 +278,7 @@
             this.pictureBox4.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.pictureBox4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.pictureBox4.Image = global::Client.Properties.Resources.Kriz9;
-            this.pictureBox4.Location = new System.Drawing.Point(918, 508);
+            this.pictureBox4.Location = new System.Drawing.Point(870, 508);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(154, 194);
             this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -291,7 +291,7 @@
             this.pictureBox5.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.pictureBox5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.pictureBox5.Image = global::Client.Properties.Resources.Kriz9;
-            this.pictureBox5.Location = new System.Drawing.Point(978, 508);
+            this.pictureBox5.Location = new System.Drawing.Point(930, 508);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(154, 194);
             this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -304,7 +304,7 @@
             this.pictureBox6.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.pictureBox6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.pictureBox6.Image = global::Client.Properties.Resources.Kriz9;
-            this.pictureBox6.Location = new System.Drawing.Point(1037, 508);
+            this.pictureBox6.Location = new System.Drawing.Point(989, 508);
             this.pictureBox6.Name = "pictureBox6";
             this.pictureBox6.Size = new System.Drawing.Size(154, 194);
             this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -317,7 +317,7 @@
             this.pictureBox7.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.pictureBox7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.pictureBox7.Image = global::Client.Properties.Resources.Kriz9;
-            this.pictureBox7.Location = new System.Drawing.Point(1095, 508);
+            this.pictureBox7.Location = new System.Drawing.Point(1047, 508);
             this.pictureBox7.Name = "pictureBox7";
             this.pictureBox7.Size = new System.Drawing.Size(154, 194);
             this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -330,7 +330,7 @@
             this.pictureBox8.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.pictureBox8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.pictureBox8.Image = global::Client.Properties.Resources.Kriz9;
-            this.pictureBox8.Location = new System.Drawing.Point(1155, 508);
+            this.pictureBox8.Location = new System.Drawing.Point(1107, 508);
             this.pictureBox8.Name = "pictureBox8";
             this.pictureBox8.Size = new System.Drawing.Size(154, 194);
             this.pictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -342,7 +342,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1466, 714);
+            this.ClientSize = new System.Drawing.Size(1370, 714);
             this.Controls.Add(this.pictureBox8);
             this.Controls.Add(this.pictureBox7);
             this.Controls.Add(this.pictureBox6);

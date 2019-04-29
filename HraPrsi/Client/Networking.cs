@@ -8,7 +8,7 @@ using System.Timers;
 
 namespace Client.Networking
 {
-    class SessionManager
+    class Networking
     {
         public static string sessionName;
         public static PrsiService.AppState appState;
@@ -19,7 +19,7 @@ namespace Client.Networking
 
         private string myName;
 
-        public SessionManager ()
+        public Networking ()
         {
             service = new PrsiService.WebServiceSoapClient();
         }
@@ -28,35 +28,35 @@ namespace Client.Networking
         {
             myName = playerName;
 
-            SessionManager.sessionName = service.RegisterSession(playerName);
-            SessionManager.appState = service.GetState(SessionManager.sessionName);
+            Networking.sessionName = service.RegisterSession(playerName);
+            Networking.appState = service.GetState(Networking.sessionName);
 
             SetNetworkStateTimer();
 
-            Console.WriteLine("SESSION CODE: " + SessionManager.sessionName + ", SHARE THIS WITH YOUR FRIENDS!");
+            Console.WriteLine("SESSION CODE: " + Networking.sessionName + ", SHARE THIS WITH YOUR FRIENDS!");
         }
 
         public void JoinSession (string sessionName, string playerName)
         {
-            SessionManager.sessionName = sessionName;
+            Networking.sessionName = sessionName;
 
-            service.JoinSession(SessionManager.sessionName, playerName);
+            service.JoinSession(Networking.sessionName, playerName);
 
-            if (SessionManager.appState != null)
+            if (Networking.appState != null)
             {
                 myName = playerName;
-                Console.WriteLine("Connected to session: " + SessionManager.sessionName);
+                Console.WriteLine("Connected to session: " + Networking.sessionName);
                 SetNetworkStateTimer();
             } 
         }
 
         public void LoadState ()
         {
-            SessionManager.appState = service.GetState(SessionManager.sessionName);
+            Networking.appState = service.GetState(Networking.sessionName);
             Console.WriteLine("=== APP STATE ===");
-            Console.WriteLine("game started: " + SessionManager.appState.gameStarted);
+            Console.WriteLine("game started: " + Networking.appState.gameStarted);
             Console.WriteLine("players: ");
-            foreach (Player player in SessionManager.appState.players)
+            foreach (Player player in Networking.appState.players)
             {
                 Console.WriteLine("Player: " + player.name + ", isCreator: " + player.isCreator);
             }
@@ -72,25 +72,25 @@ namespace Client.Networking
 
         private void CheckNetState(Object source, ElapsedEventArgs e)
         {
-            SessionManager.appState = service.GetState(sessionName);
+            Networking.appState = service.GetState(sessionName);
 
-            if (SessionManager.appState.players != lastAppState.players)
+            if (Networking.appState.players != lastAppState.players)
             {
                 OnPlayersChanged(appState.players);
             }
 
-            if (SessionManager.appState.gameStarted != lastAppState.gameStarted)
+            if (Networking.appState.gameStarted != lastAppState.gameStarted)
             {
-                OnGameStateChanged(SessionManager.appState.gameStarted);
+                OnGameStateChanged(Networking.appState.gameStarted);
             }
 
-            if (SessionManager.appState.playerTurn != lastAppState.playerTurn)
+            if (Networking.appState.playerTurn != lastAppState.playerTurn)
             {
-                Player player = SessionManager.appState.players.ElementAt(SessionManager.appState.playerTurn);
-                OnTurnChanged(player, SessionManager.appState.playerTurn);
+                Player player = Networking.appState.players.ElementAt(Networking.appState.playerTurn);
+                OnTurnChanged(player, Networking.appState.playerTurn);
             }
 
-            lastAppState = SessionManager.appState;
+            lastAppState = Networking.appState;
         }
 
         // voláno při změně počtu hráčů tj. někdo přišel / odešel
@@ -131,13 +131,13 @@ namespace Client.Networking
         */
         private void PlayCard (Card card)
         {
-            service.PlayCard(SessionManager.sessionName, myName, card);
+            service.PlayCard(Networking.sessionName, myName, card);
         }
 
         // zavolat, když chci přeskočit můj tah
         private void SkipTurn ()
         {
-            service.SkipTurn(SessionManager.sessionName, myName);
+            service.SkipTurn(Networking.sessionName, myName);
         }
     }
 }

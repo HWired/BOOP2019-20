@@ -14,20 +14,20 @@ namespace Client
 {
     public partial class Form1 : Form
     {
-        SessionManager sessionManager;
+        Networking.Networking sessionManager;
 
         public Form1()
         {
             InitializeComponent();
 
-            sessionManager = new SessionManager();
+            sessionManager = new Networking.Networking();
         }
 
         private void NewGameBtn_Click(object sender, EventArgs e)
         {
             string playerName = UserNameInput.Text;
             sessionManager.CreateSession(playerName);
-            SessionCodeInput.Text = SessionManager.sessionName;
+            SessionCodeInput.Text = Networking.Networking.sessionName;
         }
 
         private void JoinGameBtn_Click(object sender, EventArgs e)

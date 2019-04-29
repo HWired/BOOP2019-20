@@ -4,25 +4,26 @@ namespace Server.DataStructures
 {
     public class Player
     {
-        public string name = "";
-        public List<Card> cards = new List<Card>();
-        public bool isCreator = false;
+        private int id = 0;
+        private string name = "";
+        private List<Card> cards = new List<Card>();
+        private bool isCreator = false;
 
-        public int order = -1;
-
-        public void SetOrder (int order)
+        public Player (int id, string name, bool isCreator)
         {
-            this.order = order;
-        }
-
-        public void SetCreator (bool isCreator)
-        {
+            this.id = id;
+            this.name = name;
             this.isCreator = isCreator;
         }
 
-        public void SetName (string playerName)
+        public string GetName ()
         {
-            name = playerName;
+            return name;
+        }
+
+        public List<Card> GetCards ()
+        {
+            return cards;
         }
     }
 }

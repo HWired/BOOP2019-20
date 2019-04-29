@@ -74,6 +74,7 @@
     <Compile Include="Common\RandomString.cs" />
     <Compile Include="DataStructures\AppState.cs" />
     <Compile Include="DataStructures\Card.cs" />
+    <Compile Include="DataStructures\RegisterSessionInfo.cs" />
     <Compile Include="Enums\CardColor.cs" />
     <Compile Include="Enums\CardValue.cs" />
     <Compile Include="Enums\CardType.cs" />

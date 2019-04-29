@@ -13,13 +13,13 @@ namespace Client
 {
     public partial class Form1 : Form
     {
-        Networking networking;
+        Networking networking = new Networking();
 
         public Form1()
         {
             InitializeComponent();
 
-            networking = new Networking();
+            networking.form = this;
         }
 
         private void NewGameBtn_Click(object sender, EventArgs e)
@@ -39,6 +39,23 @@ namespace Client
         private void GetStateBtn_Click(object sender, EventArgs e)
         {
             networking.LoadState();
+        }
+
+        private void StartGameBtn_Click(object sender, EventArgs e)
+        {
+            networking.StartGame();
+        }
+
+        public void OnGameStart()
+        {
+            if (StartGameBtn.InvokeRequired)
+                StartGameBtn.Invoke(new MethodInvoker(delegate {
+                    StartGameBtn.Enabled = false;
+                }));
+            else
+            {
+                StartGameBtn.Enabled = false;
+            }
         }
     }
 }

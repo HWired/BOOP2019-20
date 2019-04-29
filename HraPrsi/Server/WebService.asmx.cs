@@ -22,64 +22,61 @@ namespace Server
         private string sessionName;
 
         [WebMethod]
-        public string RegisterSession (string playerName)
+        public RegisterSessionInfo RegisterSession (string playerName)
         {
+            RegisterSessionInfo registerSessionInfo = new RegisterSessionInfo();
             string sessionName = RandomString.Generate(5);
+            registerSessionInfo.sessionName = sessionName;
+
             CreateState(sessionName);
-
-            LoadSession(sessionName);
-            AddPlayer(playerName, true);
+            registerSessionInfo.playerID = AddPlayer(playerName, true);
             SaveSession(sessionName);
 
-            return sessionName;
+            return registerSessionInfo;
         }
 
         [WebMethod]
-        public void JoinSession (string sessionName, string playerName)
+        public int JoinSession (string sessionName, string playerName)
         {
             LoadSession(sessionName);
-
-            AddPlayer(playerName, false);
-
+            int playerID = AddPlayer(playerName, false);
             SaveSession(sessionName);
+
+            return playerID;
         }
 
-        [WebMethod]
-        public void LeaveSession (string sessionName, string playerName)
-        {
-            LoadSession(sessionName);
-
-            RemovePlayer(playerName);
-
-            SaveSession(sessionName);
-        }
-
-        private void AddPlayer(string playerName, bool isCreator)
+        public int AddPlayer(string name, bool isCreator)
         {
             Player newPlayer = new Player();
+            newPlayer.name = name;
+            newPlayer.isCreator = isCreator;
+            appState.AddPlayer(newPlayer);
 
-            newPlayer.SetName(playerName);
-            newPlayer.SetCreator(isCreator);
-            newPlayer.SetOrder(appState.players.Count);
-
-            appState.players.Add(newPlayer);
+            return newPlayer.id;
         }
 
-        private void RemovePlayer (string playerName)
+        [WebMethod]
+        public void LeaveSession (string sessionName, int playerID)
         {
-            Player player = appState.players.Find(p => p.name == playerName);
+            LoadSession(sessionName);
+            RemovePlayer(playerID);
+            SaveSession(sessionName);
+        }
+
+        private void RemovePlayer (int playerID)
+        {
+            Player player = appState.players.Find(p => p.id == playerID);
             appState.players.Remove(player);
         }
 
         [WebMethod]
-        public void StartGame (string sessionName, string playerName)
+        public void StartGame (string sessionName, int playerID)
         {
             LoadSession(sessionName);
-
-            Player player = appState.players.Find(p => p.name == playerName);
+            Player player = appState.players.Find(p => p.id == playerID);
 
             if (player.isCreator)
-                appState.gameStarted = true;
+                appState.StartGame();
 
             SaveSession(sessionName);
         }
@@ -97,7 +94,7 @@ namespace Server
                 {
                     if (CheckCardWithRules(card))
                     {
-                        appState.topCardStackPlayed = card;
+                        appState.SetPlayedCard(card);
                         player.cards.Remove(card);
                         NextPlayer(sessionName);
 
@@ -109,7 +106,8 @@ namespace Server
 
         private bool IsPlayersTurn (Player player)
         {
-            if (appState.playerTurn % player.order == 0)
+            // there should not be id
+            if (appState.playerTurn % player.id == 0)
                 return true;
 
             return false;
@@ -126,11 +124,11 @@ namespace Server
         private bool CheckCardWithRules (Card card)
         {
             // Same color? Pass
-            if (appState.topCardStackPlayed.color == card.color && card.value != CardValue.CA)
+            if (appState.cardPlayed.color == card.color && card.value != CardValue.CA)
                 return true;
 
             // Same value? Pass
-            if (appState.topCardStackPlayed.value == card.value)
+            if (appState.cardPlayed.value == card.value)
                 return true;
 
             return false;
@@ -138,8 +136,8 @@ namespace Server
 
         private void NextPlayer (string sessionName)
         {
-            appState.playerTurn += 1;
-            appState.playerTurn = appState.playerTurn % appState.players.Count;
+            //appState.playerTurn += 1;
+            //appState.playerTurn = appState.playerTurn % appState.players.Count;
         }
 
         [WebMethod]
@@ -167,6 +165,7 @@ namespace Server
         private void CreateState (string sessionName)
         {
             Application[sessionName] = new AppState();
+            LoadSession(sessionName);
         }
 
         [WebMethod]

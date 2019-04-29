@@ -100,6 +100,9 @@
     <None Include="Connected Services\PrsiService\Client.PrsiService.PlayCardResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Connected Services\PrsiService\Client.PrsiService.RegisterSessionInfo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\PrsiService\Client.PrsiService.RegisterSessionResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

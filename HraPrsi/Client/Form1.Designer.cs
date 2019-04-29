@@ -35,6 +35,7 @@
             this.GetStateBtn = new System.Windows.Forms.Button();
             this.UserNameLabel = new System.Windows.Forms.Label();
             this.UserNameInput = new System.Windows.Forms.TextBox();
+            this.StartGameBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // NewGameBtn
@@ -99,11 +100,22 @@
             this.UserNameInput.Size = new System.Drawing.Size(168, 20);
             this.UserNameInput.TabIndex = 5;
             // 
+            // StartGameBtn
+            // 
+            this.StartGameBtn.Location = new System.Drawing.Point(323, 13);
+            this.StartGameBtn.Name = "StartGameBtn";
+            this.StartGameBtn.Size = new System.Drawing.Size(119, 23);
+            this.StartGameBtn.TabIndex = 7;
+            this.StartGameBtn.Text = "Start Game";
+            this.StartGameBtn.UseVisualStyleBackColor = true;
+            this.StartGameBtn.Click += new System.EventHandler(this.StartGameBtn_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.StartGameBtn);
             this.Controls.Add(this.UserNameLabel);
             this.Controls.Add(this.UserNameInput);
             this.Controls.Add(this.GetStateBtn);
@@ -127,6 +139,7 @@
         private System.Windows.Forms.Button GetStateBtn;
         private System.Windows.Forms.Label UserNameLabel;
         private System.Windows.Forms.TextBox UserNameInput;
+        private System.Windows.Forms.Button StartGameBtn;
     }
 }
 

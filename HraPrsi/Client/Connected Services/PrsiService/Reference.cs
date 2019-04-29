@@ -15,6 +15,66 @@ namespace Client.PrsiService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="RegisterSessionInfo", Namespace="http://tempuri.org/")]
+    [System.SerializableAttribute()]
+    public partial class RegisterSessionInfo : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string sessionNameField;
+        
+        private int playerIDField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
+        public string sessionName {
+            get {
+                return this.sessionNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.sessionNameField, value) != true)) {
+                    this.sessionNameField = value;
+                    this.RaisePropertyChanged("sessionName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=1)]
+        public int playerID {
+            get {
+                return this.playerIDField;
+            }
+            set {
+                if ((this.playerIDField.Equals(value) != true)) {
+                    this.playerIDField = value;
+                    this.RaisePropertyChanged("playerID");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Card", Namespace="http://tempuri.org/")]
     [System.SerializableAttribute()]
     public partial class Card : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -187,7 +247,7 @@ namespace Client.PrsiService {
         private Client.PrsiService.Card[] cardStackField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Client.PrsiService.Card topCardStackPlayedField;
+        private Client.PrsiService.Card cardPlayedField;
         
         private bool gameStartedField;
         
@@ -230,14 +290,14 @@ namespace Client.PrsiService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
-        public Client.PrsiService.Card topCardStackPlayed {
+        public Client.PrsiService.Card cardPlayed {
             get {
-                return this.topCardStackPlayedField;
+                return this.cardPlayedField;
             }
             set {
-                if ((object.ReferenceEquals(this.topCardStackPlayedField, value) != true)) {
-                    this.topCardStackPlayedField = value;
-                    this.RaisePropertyChanged("topCardStackPlayed");
+                if ((object.ReferenceEquals(this.cardPlayedField, value) != true)) {
+                    this.cardPlayedField = value;
+                    this.RaisePropertyChanged("cardPlayed");
                 }
             }
         }
@@ -295,7 +355,7 @@ namespace Client.PrsiService {
         
         private bool isCreatorField;
         
-        private int orderField;
+        private int idField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -347,14 +407,14 @@ namespace Client.PrsiService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=3)]
-        public int order {
+        public int id {
             get {
-                return this.orderField;
+                return this.idField;
             }
             set {
-                if ((this.orderField.Equals(value) != true)) {
-                    this.orderField = value;
-                    this.RaisePropertyChanged("order");
+                if ((this.idField.Equals(value) != true)) {
+                    this.idField = value;
+                    this.RaisePropertyChanged("id");
                 }
             }
         }
@@ -481,12 +541,12 @@ namespace Client.PrsiService {
     public partial class RegisterSessionResponseBody {
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public string RegisterSessionResult;
+        public Client.PrsiService.RegisterSessionInfo RegisterSessionResult;
         
         public RegisterSessionResponseBody() {
         }
         
-        public RegisterSessionResponseBody(string RegisterSessionResult) {
+        public RegisterSessionResponseBody(Client.PrsiService.RegisterSessionInfo RegisterSessionResult) {
             this.RegisterSessionResult = RegisterSessionResult;
         }
     }
@@ -549,10 +609,17 @@ namespace Client.PrsiService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.Runtime.Serialization.DataContractAttribute()]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
     public partial class JoinSessionResponseBody {
         
+        [System.Runtime.Serialization.DataMemberAttribute(Order=0)]
+        public int JoinSessionResult;
+        
         public JoinSessionResponseBody() {
+        }
+        
+        public JoinSessionResponseBody(int JoinSessionResult) {
+            this.JoinSessionResult = JoinSessionResult;
         }
     }
     
@@ -582,15 +649,15 @@ namespace Client.PrsiService {
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
         public string sessionName;
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
-        public string playerName;
+        [System.Runtime.Serialization.DataMemberAttribute(Order=1)]
+        public int playerID;
         
         public LeaveSessionRequestBody() {
         }
         
-        public LeaveSessionRequestBody(string sessionName, string playerName) {
+        public LeaveSessionRequestBody(string sessionName, int playerID) {
             this.sessionName = sessionName;
-            this.playerName = playerName;
+            this.playerID = playerID;
         }
     }
     
@@ -647,15 +714,15 @@ namespace Client.PrsiService {
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
         public string sessionName;
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
-        public string playerName;
+        [System.Runtime.Serialization.DataMemberAttribute(Order=1)]
+        public int playerID;
         
         public StartGameRequestBody() {
         }
         
-        public StartGameRequestBody(string sessionName, string playerName) {
+        public StartGameRequestBody(string sessionName, int playerID) {
             this.sessionName = sessionName;
-            this.playerName = playerName;
+            this.playerID = playerID;
         }
     }
     
@@ -920,7 +987,7 @@ namespace Client.PrsiService {
             return base.Channel.RegisterSession(request);
         }
         
-        public string RegisterSession(string playerName) {
+        public Client.PrsiService.RegisterSessionInfo RegisterSession(string playerName) {
             Client.PrsiService.RegisterSessionRequest inValue = new Client.PrsiService.RegisterSessionRequest();
             inValue.Body = new Client.PrsiService.RegisterSessionRequestBody();
             inValue.Body.playerName = playerName;
@@ -945,12 +1012,13 @@ namespace Client.PrsiService {
             return base.Channel.JoinSession(request);
         }
         
-        public void JoinSession(string sessionName, string playerName) {
+        public int JoinSession(string sessionName, string playerName) {
             Client.PrsiService.JoinSessionRequest inValue = new Client.PrsiService.JoinSessionRequest();
             inValue.Body = new Client.PrsiService.JoinSessionRequestBody();
             inValue.Body.sessionName = sessionName;
             inValue.Body.playerName = playerName;
             Client.PrsiService.JoinSessionResponse retVal = ((Client.PrsiService.WebServiceSoap)(this)).JoinSession(inValue);
+            return retVal.Body.JoinSessionResult;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -971,11 +1039,11 @@ namespace Client.PrsiService {
             return base.Channel.LeaveSession(request);
         }
         
-        public void LeaveSession(string sessionName, string playerName) {
+        public void LeaveSession(string sessionName, int playerID) {
             Client.PrsiService.LeaveSessionRequest inValue = new Client.PrsiService.LeaveSessionRequest();
             inValue.Body = new Client.PrsiService.LeaveSessionRequestBody();
             inValue.Body.sessionName = sessionName;
-            inValue.Body.playerName = playerName;
+            inValue.Body.playerID = playerID;
             Client.PrsiService.LeaveSessionResponse retVal = ((Client.PrsiService.WebServiceSoap)(this)).LeaveSession(inValue);
         }
         
@@ -984,11 +1052,11 @@ namespace Client.PrsiService {
             return base.Channel.LeaveSessionAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Client.PrsiService.LeaveSessionResponse> LeaveSessionAsync(string sessionName, string playerName) {
+        public System.Threading.Tasks.Task<Client.PrsiService.LeaveSessionResponse> LeaveSessionAsync(string sessionName, int playerID) {
             Client.PrsiService.LeaveSessionRequest inValue = new Client.PrsiService.LeaveSessionRequest();
             inValue.Body = new Client.PrsiService.LeaveSessionRequestBody();
             inValue.Body.sessionName = sessionName;
-            inValue.Body.playerName = playerName;
+            inValue.Body.playerID = playerID;
             return ((Client.PrsiService.WebServiceSoap)(this)).LeaveSessionAsync(inValue);
         }
         
@@ -997,11 +1065,11 @@ namespace Client.PrsiService {
             return base.Channel.StartGame(request);
         }
         
-        public void StartGame(string sessionName, string playerName) {
+        public void StartGame(string sessionName, int playerID) {
             Client.PrsiService.StartGameRequest inValue = new Client.PrsiService.StartGameRequest();
             inValue.Body = new Client.PrsiService.StartGameRequestBody();
             inValue.Body.sessionName = sessionName;
-            inValue.Body.playerName = playerName;
+            inValue.Body.playerID = playerID;
             Client.PrsiService.StartGameResponse retVal = ((Client.PrsiService.WebServiceSoap)(this)).StartGame(inValue);
         }
         
@@ -1010,11 +1078,11 @@ namespace Client.PrsiService {
             return base.Channel.StartGameAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Client.PrsiService.StartGameResponse> StartGameAsync(string sessionName, string playerName) {
+        public System.Threading.Tasks.Task<Client.PrsiService.StartGameResponse> StartGameAsync(string sessionName, int playerID) {
             Client.PrsiService.StartGameRequest inValue = new Client.PrsiService.StartGameRequest();
             inValue.Body = new Client.PrsiService.StartGameRequestBody();
             inValue.Body.sessionName = sessionName;
-            inValue.Body.playerName = playerName;
+            inValue.Body.playerID = playerID;
             return ((Client.PrsiService.WebServiceSoap)(this)).StartGameAsync(inValue);
         }
         

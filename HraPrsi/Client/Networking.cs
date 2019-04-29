@@ -10,8 +10,8 @@ namespace Client.Networking
 {
     class Networking
     {
-        public static string sessionName;
-        public static PrsiService.AppState appState;
+        public string sessionName { get; private set; }
+        private PrsiService.AppState appState;
         private PrsiService.AppState lastAppState;
 
         private PrsiService.WebServiceSoapClient service;
@@ -28,35 +28,35 @@ namespace Client.Networking
         {
             myName = playerName;
 
-            Networking.sessionName = service.RegisterSession(playerName);
-            Networking.appState = service.GetState(Networking.sessionName);
+            sessionName = service.RegisterSession(playerName);
+            appState = service.GetState(sessionName);
 
             SetNetworkStateTimer();
 
-            Console.WriteLine("SESSION CODE: " + Networking.sessionName + ", SHARE THIS WITH YOUR FRIENDS!");
+            Console.WriteLine("SESSION CODE: " + sessionName + ", SHARE THIS WITH YOUR FRIENDS!");
         }
 
         public void JoinSession (string sessionName, string playerName)
         {
-            Networking.sessionName = sessionName;
+            sessionName = sessionName;
 
-            service.JoinSession(Networking.sessionName, playerName);
+            service.JoinSession(sessionName, playerName);
 
-            if (Networking.appState != null)
+            if (appState != null)
             {
                 myName = playerName;
-                Console.WriteLine("Connected to session: " + Networking.sessionName);
+                Console.WriteLine("Connected to session: " + sessionName);
                 SetNetworkStateTimer();
             } 
         }
 
         public void LoadState ()
         {
-            Networking.appState = service.GetState(Networking.sessionName);
+            appState = service.GetState(sessionName);
             Console.WriteLine("=== APP STATE ===");
-            Console.WriteLine("game started: " + Networking.appState.gameStarted);
+            Console.WriteLine("game started: " + appState.gameStarted);
             Console.WriteLine("players: ");
-            foreach (Player player in Networking.appState.players)
+            foreach (Player player in appState.players)
             {
                 Console.WriteLine("Player: " + player.name + ", isCreator: " + player.isCreator);
             }
@@ -72,25 +72,25 @@ namespace Client.Networking
 
         private void CheckNetState(Object source, ElapsedEventArgs e)
         {
-            Networking.appState = service.GetState(sessionName);
+            appState = service.GetState(sessionName);
 
-            if (Networking.appState.players != lastAppState.players)
+            if (appState.players != lastAppState.players)
             {
                 OnPlayersChanged(appState.players);
             }
 
-            if (Networking.appState.gameStarted != lastAppState.gameStarted)
+            if (appState.gameStarted != lastAppState.gameStarted)
             {
-                OnGameStateChanged(Networking.appState.gameStarted);
+                OnGameStateChanged(appState.gameStarted);
             }
 
-            if (Networking.appState.playerTurn != lastAppState.playerTurn)
+            if (appState.playerTurn != lastAppState.playerTurn)
             {
-                Player player = Networking.appState.players.ElementAt(Networking.appState.playerTurn);
-                OnTurnChanged(player, Networking.appState.playerTurn);
+                Player player = appState.players.ElementAt(appState.playerTurn);
+                OnTurnChanged(player, appState.playerTurn);
             }
 
-            lastAppState = Networking.appState;
+            lastAppState = appState;
         }
 
         // voláno při změně počtu hráčů tj. někdo přišel / odešel
@@ -131,13 +131,13 @@ namespace Client.Networking
         */
         private void PlayCard (Card card)
         {
-            service.PlayCard(Networking.sessionName, myName, card);
+            service.PlayCard(sessionName, myName, card);
         }
 
         // zavolat, když chci přeskočit můj tah
         private void SkipTurn ()
         {
-            service.SkipTurn(Networking.sessionName, myName);
+            service.SkipTurn(sessionName, myName);
         }
     }
 }

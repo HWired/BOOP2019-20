@@ -14,32 +14,32 @@ namespace Client
 {
     public partial class Form1 : Form
     {
-        Networking.Networking sessionManager;
+        Networking.Networking networking;
 
         public Form1()
         {
             InitializeComponent();
 
-            sessionManager = new Networking.Networking();
+            networking = new Networking.Networking();
         }
 
         private void NewGameBtn_Click(object sender, EventArgs e)
         {
             string playerName = UserNameInput.Text;
-            sessionManager.CreateSession(playerName);
-            SessionCodeInput.Text = Networking.Networking.sessionName;
+            networking.CreateSession(playerName);
+            SessionCodeInput.Text = networking.sessionName;
         }
 
         private void JoinGameBtn_Click(object sender, EventArgs e)
         {
             string sessionName = SessionCodeInput.Text;
             string playerName = UserNameInput.Text;
-            sessionManager.JoinSession(sessionName, playerName);
+            networking.JoinSession(sessionName, playerName);
         }
 
         private void GetStateBtn_Click(object sender, EventArgs e)
         {
-            sessionManager.LoadState();
+            networking.LoadState();
         }
     }
 }

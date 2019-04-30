@@ -56,16 +56,20 @@ namespace Client
 
         public void UpdatePlayedCard (Card card)
         {
+            // clear box
+            if (CardOnTheTableBox.InvokeRequired) this.Invoke(new MethodInvoker(delegate { CardOnTheTableBox.Controls.Clear(); }));
+            else CardOnTheTableBox.Controls.Clear();
+
             ClientCard cardPicture = new ClientCard();
             cardPicture.card = card;
             cardPicture.Image = CardToImage(card);
-            cardPicture.Location = new Point(600, 210);
+            cardPicture.Location = new Point(20, 20);
             cardPicture.Anchor = AnchorStyles.Bottom;
             cardPicture.SizeMode = PictureBoxSizeMode.StretchImage;
             cardPicture.Size = new Size(154, 194);
 
-            if (this.InvokeRequired) this.Invoke(new MethodInvoker(delegate { Controls.Add(cardPicture); }));
-            else Controls.Add(cardPicture);
+            if (this.InvokeRequired) this.Invoke(new MethodInvoker(delegate { CardOnTheTableBox.Controls.Add(cardPicture); }));
+            else CardOnTheTableBox.Controls.Add(cardPicture);
         }
 
         public void UpdatePlayerCards (Card[] cards)
@@ -75,7 +79,7 @@ namespace Client
             else CardBox.Controls.Clear();
             
 
-            int x = 98;
+            int x = 50;
             foreach (Card card in cards)
             {
                 ClientCard cardPicture = new ClientCard();
@@ -191,9 +195,6 @@ namespace Client
             Console.WriteLine($"Right now am playin card: {selectedCard.card.type}, {selectedCard.card.color}, {selectedCard.card.value}");
             networking.PlayCard(selectedCard.card);
             networking.LoadState();
-            //PlayedCard.Image = selectedCard.Image;
-            //selectedCard.Visible = false;
-            //selectedCard.Image = null;
         }
 
 

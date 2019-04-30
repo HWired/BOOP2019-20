@@ -115,10 +115,19 @@ namespace Server
                 if (CheckCardWithRules(card))
                 {
                     appState.SetPlayedCard(card);
-                    appState.players.ElementAt(appState.playerTurn).cards.Remove(card);
+                    RemoveCardFromPlayer(player, card);
                     NextPlayer(sessionName);
                     SaveSession(sessionName);
                 }
+            }
+        }
+
+        private void RemoveCardFromPlayer(Player player, Card card)
+        {
+            for (int c = 0; c < player.cards.Count; c++)
+            {
+                if (player.cards[c].color == card.color && player.cards[c].type == card.type && player.cards[c].value == card.value)
+                    appState.players.ElementAt(appState.playerTurn).cards.RemoveAt(c);
             }
         }
 

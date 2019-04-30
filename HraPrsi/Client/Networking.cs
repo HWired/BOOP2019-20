@@ -179,6 +179,10 @@ namespace Client
             service.StartGame(sessionName, this.playerID);
         }
 
+        public void LeaveRoom ()
+        {
+            service.LeaveSession(sessionName, this.playerID);
+        }
 
         /* zavolat, když chci hrát kartu
          * sessionManager.PlayCard(SessionManager.appState.cardStack.ElementAt(3)); - z GUI.cs

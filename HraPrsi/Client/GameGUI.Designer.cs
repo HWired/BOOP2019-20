@@ -51,6 +51,7 @@
             this.pictureBox8 = new System.Windows.Forms.PictureBox();
             this.PlayerBox = new System.Windows.Forms.GroupBox();
             this.StartGameBtn = new System.Windows.Forms.Button();
+            this.LeaveRoomBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.Karta1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.OdlozenaKarta)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Karta2)).BeginInit();
@@ -353,16 +354,28 @@
             // 
             this.StartGameBtn.Location = new System.Drawing.Point(216, 13);
             this.StartGameBtn.Name = "StartGameBtn";
-            this.StartGameBtn.Size = new System.Drawing.Size(75, 23);
+            this.StartGameBtn.Size = new System.Drawing.Size(95, 23);
             this.StartGameBtn.TabIndex = 23;
             this.StartGameBtn.Text = "Start Game";
             this.StartGameBtn.UseVisualStyleBackColor = true;
+            this.StartGameBtn.Click += new System.EventHandler(this.StartGameBtn_Click);
+            // 
+            // LeaveRoomBtn
+            // 
+            this.LeaveRoomBtn.Location = new System.Drawing.Point(216, 42);
+            this.LeaveRoomBtn.Name = "LeaveRoomBtn";
+            this.LeaveRoomBtn.Size = new System.Drawing.Size(95, 23);
+            this.LeaveRoomBtn.TabIndex = 24;
+            this.LeaveRoomBtn.Text = "Leave Room";
+            this.LeaveRoomBtn.UseVisualStyleBackColor = true;
+            this.LeaveRoomBtn.Click += new System.EventHandler(this.LeaveRoomBtn_Click);
             // 
             // GameGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1370, 714);
+            this.Controls.Add(this.LeaveRoomBtn);
             this.Controls.Add(this.StartGameBtn);
             this.Controls.Add(this.PlayerBox);
             this.Controls.Add(this.pictureBox8);
@@ -435,5 +448,6 @@
         private System.Windows.Forms.PictureBox pictureBox8;
         private System.Windows.Forms.GroupBox PlayerBox;
         private System.Windows.Forms.Button StartGameBtn;
+        private System.Windows.Forms.Button LeaveRoomBtn;
     }
 }

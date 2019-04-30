@@ -48,8 +48,6 @@ namespace Client
 
                 y += 24;
             }
-
-            Console.WriteLine("### GUI CALLING!!!!");
         }
 
         public void OnGameStart()
@@ -57,10 +55,12 @@ namespace Client
             if (StartGameBtn.InvokeRequired)
                 StartGameBtn.Invoke(new MethodInvoker(delegate {
                     StartGameBtn.Enabled = false;
+                    StartGameBtn.Visible = false;
                 }));
             else
             {
                 StartGameBtn.Enabled = false;
+                StartGameBtn.Visible = false;
             }
         }
 
@@ -202,6 +202,17 @@ namespace Client
                 karta.Visible = true;
                 kartaRozdana = true;
             }
+        }
+
+        private void StartGameBtn_Click(object sender, EventArgs e)
+        {
+            networking.StartGame();
+        }
+
+        private void LeaveRoomBtn_Click(object sender, EventArgs e)
+        {
+            networking.LeaveRoom();
+            this.Close();
         }
     }
 }

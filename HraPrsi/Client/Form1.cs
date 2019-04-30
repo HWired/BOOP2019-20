@@ -27,13 +27,19 @@ namespace Client
             string playerName = UserNameInput.Text;
             networking.CreateSession(playerName);
             SessionCodeInput.Text = networking.sessionName;
+            var myForm = new GUI();
+            myForm.Show();
         }
 
         private void JoinGameBtn_Click(object sender, EventArgs e)
         {
-            string sessionName = SessionCodeInput.Text;
+            
+           /* string sessionName = SessionCodeInput.Text;
             string playerName = UserNameInput.Text;
             networking.JoinSession(sessionName, playerName);
+           */
+            var myForm = new GUI();
+            myForm.Show();
         }
 
         private void GetStateBtn_Click(object sender, EventArgs e)

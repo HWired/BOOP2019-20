@@ -15,6 +15,7 @@ namespace Client
     {
         bool ulozenikarty = false;
         bool kartaRozdana = false ;
+        bool jmenoDano = false;
         PictureBox predeslaKarta = null;
         PictureBox vybranakarta = null;
         Bitmap[,] hraciKarty = new Bitmap [4,13];
@@ -24,6 +25,8 @@ namespace Client
         {
             InitializeComponent();
             Nahraj();
+
+            prirazeniJmen();
         }
 
         private void Hrajkartu_Click(object sender, EventArgs e)
@@ -34,7 +37,11 @@ namespace Client
             
 
         }
-     
+
+        private void prirazeniJmen()
+        {
+            daniJmena(label1,"Test");
+        }
 
         private void Tahnikartu_Click(object sender, EventArgs e)
         {
@@ -72,7 +79,7 @@ namespace Client
             //[2][x] Piky
             //[3][x] Krize
             //[4][1-2]  Back,TestKarta  
-
+/*
             hraciKarty[0,0] = Resources.Kary2;
             hraciKarty[0,1] = Resources.Kary3;
             hraciKarty[0,2] = Resources.Kary4;
@@ -130,7 +137,7 @@ namespace Client
             hraciKarty[3,12] = Resources.Kriz2;
 
             
-            
+            */
             
 
           
@@ -163,6 +170,18 @@ namespace Client
                 karta.Image = (Image)obrazek;
                 karta.Visible = true;
                 kartaRozdana = true;
+            }
+        }
+
+        private void daniJmena(Label jmeno,string Nick)
+        {
+
+
+            if (jmeno.Visible == false && jmenoDano == false)
+            {
+                jmeno.Text = Nick;
+                jmeno.Visible = true;
+                jmenoDano = true;
             }
         }
     }

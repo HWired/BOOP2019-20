@@ -20,7 +20,7 @@ namespace Client
         private PrsiService.WebServiceSoapClient service;
         private System.Timers.Timer netSyncTimer;
 
-        public StartingGUI form;
+        public StartingGUI startingGUI;
         public GameGUI gameGUI;
 
         public Networking ()
@@ -148,7 +148,7 @@ namespace Client
         {
             if (gameStarted)
             {
-                form.OnGameStart();
+                startingGUI.OnGameStart();
                 Console.WriteLine("Game just started");
             }
             else

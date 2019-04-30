@@ -19,7 +19,7 @@ namespace Client
         {
             InitializeComponent();
 
-            networking.form = this;
+            networking.startingGUI = this;
         }
 
         private void NewGameBtn_Click(object sender, EventArgs e)
@@ -28,9 +28,7 @@ namespace Client
             networking.CreateSession(playerName);
             SessionCodeInput.Text = networking.sessionName;
 
-            var gameGUI = new GameGUI(networking);
-            networking.gameGUI = gameGUI;
-            gameGUI.Show();
+            RunGame();
         }
 
         private void JoinGameBtn_Click(object sender, EventArgs e)
@@ -40,6 +38,11 @@ namespace Client
             string playerName = UserNameInput.Text;
             networking.JoinSession(sessionName, playerName);
 
+            RunGame();
+        }
+
+        private void RunGame ()
+        {
             var gameGUI = new GameGUI(networking);
             networking.gameGUI = gameGUI;
             gameGUI.Show();

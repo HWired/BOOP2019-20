@@ -15,20 +15,11 @@ namespace Client
 {
     public partial class GameGUI : Form
     {
-        bool ulozenikarty = false;
-        // to check something
-        bool kartaRozdana = false;
-
-        // previously selected card
-        PictureBox predeslaKarta = null;
-        // selected card - this interests me
-        ClientCard selectedCard = null;
-
-        // hraciKarty[0,0] = Resources.Kary2;
-        Bitmap[,] hraciKarty = new Bitmap [4,13];
-        Bitmap newCard;
-
         Networking networking;
+
+        bool cardSaved = false;
+        PictureBox previouslySelectedCard = null;
+        ClientCard selectedCard = null;
 
         public GameGUI(Networking networking)
         {
@@ -205,27 +196,15 @@ namespace Client
 
         private void Card_Click(object sender, EventArgs e)
         {
-            if (ulozenikarty)
+            if (cardSaved)
             {
-                predeslaKarta.Location = new Point(predeslaKarta.Location.X, predeslaKarta.Location.Y + 50);
+                previouslySelectedCard.Location = new Point(previouslySelectedCard.Location.X, previouslySelectedCard.Location.Y + 50);
             }
-            predeslaKarta = (PictureBox)sender;
-            ulozenikarty = true;
+            previouslySelectedCard = (PictureBox)sender;
+            cardSaved = true;
             selectedCard = ((ClientCard)sender);
             selectedCard.Location = new Point(selectedCard.Location.X, selectedCard.Location.Y - 50);
 
-        }
-
-        // obrazek??? what is that?
-        // inserts a new card into the stack (into the first place, kartaRozdana)
-        private void daniKarty(PictureBox karta)
-        {
-            if(karta.Visible == false && kartaRozdana == false)
-            {
-                karta.Image = (Image)newCard;
-                karta.Visible = true;
-                kartaRozdana = true;
-            }
         }
 
         private void StartGameBtn_Click(object sender, EventArgs e)

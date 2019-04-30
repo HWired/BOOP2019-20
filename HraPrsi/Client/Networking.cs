@@ -153,7 +153,7 @@ namespace Client
         {
             if (gameStarted)
             {
-                startingGUI.OnGameStart();
+                gameGUI.OnGameStart();
                 Console.WriteLine("Game just started");
             }
             else

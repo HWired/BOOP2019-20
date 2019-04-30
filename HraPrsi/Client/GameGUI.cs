@@ -52,6 +52,18 @@ namespace Client
             Console.WriteLine("### GUI CALLING!!!!");
         }
 
+        public void OnGameStart()
+        {
+            if (StartGameBtn.InvokeRequired)
+                StartGameBtn.Invoke(new MethodInvoker(delegate {
+                    StartGameBtn.Enabled = false;
+                }));
+            else
+            {
+                StartGameBtn.Enabled = false;
+            }
+        }
+
         public void UpdatePlayerListInvoke (Player[] players)
         {
             if (PlayerBox.InvokeRequired)

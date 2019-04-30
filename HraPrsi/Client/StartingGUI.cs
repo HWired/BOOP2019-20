@@ -19,6 +19,8 @@ namespace Client
         {
             InitializeComponent();
 
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+
             networking.startingGUI = this;
         }
 
@@ -46,28 +48,6 @@ namespace Client
             var gameGUI = new GameGUI(networking);
             networking.gameGUI = gameGUI;
             gameGUI.Show();
-        }
-
-        private void GetStateBtn_Click(object sender, EventArgs e)
-        {
-            networking.LoadState();
-        }
-
-        private void StartGameBtn_Click(object sender, EventArgs e)
-        {
-            networking.StartGame();
-        }
-
-        public void OnGameStart()
-        {
-            if (StartGameBtn.InvokeRequired)
-                StartGameBtn.Invoke(new MethodInvoker(delegate {
-                    StartGameBtn.Enabled = false;
-                }));
-            else
-            {
-                StartGameBtn.Enabled = false;
-            }
         }
     }
 }

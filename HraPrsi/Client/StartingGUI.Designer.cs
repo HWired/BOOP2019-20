@@ -32,15 +32,13 @@
             this.SessionCodeInput = new System.Windows.Forms.TextBox();
             this.SessionCodeLabel = new System.Windows.Forms.Label();
             this.JoinGameBtn = new System.Windows.Forms.Button();
-            this.GetStateBtn = new System.Windows.Forms.Button();
             this.UserNameLabel = new System.Windows.Forms.Label();
             this.UserNameInput = new System.Windows.Forms.TextBox();
-            this.StartGameBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // NewGameBtn
             // 
-            this.NewGameBtn.Location = new System.Drawing.Point(13, 13);
+            this.NewGameBtn.Location = new System.Drawing.Point(12, 64);
             this.NewGameBtn.Name = "NewGameBtn";
             this.NewGameBtn.Size = new System.Drawing.Size(119, 23);
             this.NewGameBtn.TabIndex = 0;
@@ -50,15 +48,15 @@
             // 
             // SessionCodeInput
             // 
-            this.SessionCodeInput.Location = new System.Drawing.Point(89, 68);
+            this.SessionCodeInput.Location = new System.Drawing.Point(89, 38);
             this.SessionCodeInput.Name = "SessionCodeInput";
-            this.SessionCodeInput.Size = new System.Drawing.Size(168, 20);
+            this.SessionCodeInput.Size = new System.Drawing.Size(297, 20);
             this.SessionCodeInput.TabIndex = 1;
             // 
             // SessionCodeLabel
             // 
             this.SessionCodeLabel.AutoSize = true;
-            this.SessionCodeLabel.Location = new System.Drawing.Point(12, 71);
+            this.SessionCodeLabel.Location = new System.Drawing.Point(12, 41);
             this.SessionCodeLabel.Name = "SessionCodeLabel";
             this.SessionCodeLabel.Size = new System.Drawing.Size(71, 13);
             this.SessionCodeLabel.TabIndex = 2;
@@ -66,7 +64,7 @@
             // 
             // JoinGameBtn
             // 
-            this.JoinGameBtn.Location = new System.Drawing.Point(138, 13);
+            this.JoinGameBtn.Location = new System.Drawing.Point(267, 64);
             this.JoinGameBtn.Name = "JoinGameBtn";
             this.JoinGameBtn.Size = new System.Drawing.Size(119, 23);
             this.JoinGameBtn.TabIndex = 3;
@@ -74,20 +72,10 @@
             this.JoinGameBtn.UseVisualStyleBackColor = true;
             this.JoinGameBtn.Click += new System.EventHandler(this.JoinGameBtn_Click);
             // 
-            // GetStateBtn
-            // 
-            this.GetStateBtn.Location = new System.Drawing.Point(15, 94);
-            this.GetStateBtn.Name = "GetStateBtn";
-            this.GetStateBtn.Size = new System.Drawing.Size(119, 23);
-            this.GetStateBtn.TabIndex = 4;
-            this.GetStateBtn.Text = "Get state";
-            this.GetStateBtn.UseVisualStyleBackColor = true;
-            this.GetStateBtn.Click += new System.EventHandler(this.GetStateBtn_Click);
-            // 
             // UserNameLabel
             // 
             this.UserNameLabel.AutoSize = true;
-            this.UserNameLabel.Location = new System.Drawing.Point(12, 45);
+            this.UserNameLabel.Location = new System.Drawing.Point(12, 15);
             this.UserNameLabel.Name = "UserNameLabel";
             this.UserNameLabel.Size = new System.Drawing.Size(65, 13);
             this.UserNameLabel.TabIndex = 6;
@@ -95,36 +83,25 @@
             // 
             // UserNameInput
             // 
-            this.UserNameInput.Location = new System.Drawing.Point(89, 42);
+            this.UserNameInput.Location = new System.Drawing.Point(89, 12);
             this.UserNameInput.Name = "UserNameInput";
-            this.UserNameInput.Size = new System.Drawing.Size(168, 20);
+            this.UserNameInput.Size = new System.Drawing.Size(297, 20);
             this.UserNameInput.TabIndex = 5;
             // 
-            // StartGameBtn
-            // 
-            this.StartGameBtn.Location = new System.Drawing.Point(323, 13);
-            this.StartGameBtn.Name = "StartGameBtn";
-            this.StartGameBtn.Size = new System.Drawing.Size(119, 23);
-            this.StartGameBtn.TabIndex = 7;
-            this.StartGameBtn.Text = "Start Game";
-            this.StartGameBtn.UseVisualStyleBackColor = true;
-            this.StartGameBtn.Click += new System.EventHandler(this.StartGameBtn_Click);
-            // 
-            // Form1
+            // StartingGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.StartGameBtn);
+            this.ClientSize = new System.Drawing.Size(398, 98);
             this.Controls.Add(this.UserNameLabel);
             this.Controls.Add(this.UserNameInput);
-            this.Controls.Add(this.GetStateBtn);
             this.Controls.Add(this.JoinGameBtn);
             this.Controls.Add(this.SessionCodeLabel);
             this.Controls.Add(this.SessionCodeInput);
             this.Controls.Add(this.NewGameBtn);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.MaximizeBox = false;
+            this.Name = "StartingGUI";
+            this.Text = "Game manager";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -136,10 +113,8 @@
         private System.Windows.Forms.TextBox SessionCodeInput;
         private System.Windows.Forms.Label SessionCodeLabel;
         private System.Windows.Forms.Button JoinGameBtn;
-        private System.Windows.Forms.Button GetStateBtn;
         private System.Windows.Forms.Label UserNameLabel;
         private System.Windows.Forms.TextBox UserNameInput;
-        private System.Windows.Forms.Button StartGameBtn;
     }
 }
 

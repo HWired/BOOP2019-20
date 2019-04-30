@@ -30,9 +30,16 @@ namespace Server
 
             CreateState(sessionName);
             registerSessionInfo.playerID = AddPlayer(playerName, true);
+            GenerateCardDeck();
             SaveSession(sessionName);
 
             return registerSessionInfo;
+        }
+
+        private void GenerateCardDeck ()
+        {
+            RandomCardDeck randomCardDeck = new RandomCardDeck();
+            appState.cardStack = randomCardDeck.GetCards();
         }
 
         [WebMethod]

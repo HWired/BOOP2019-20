@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace Client
 {
-    class Networking
+    public class Networking
     {
         public string sessionName { get; private set; }
         private int playerID;
@@ -68,6 +68,11 @@ namespace Client
             foreach (Player player in appState.players)
             {
                 Console.WriteLine("Player: " + player.name + ", isCreator: " + player.isCreator);
+            }
+            Console.WriteLine("# CARDS: ");
+            foreach (Card card in appState.cardStack)
+            {
+                Console.WriteLine($"{card.type}     {card.color}        {card.value}");
             }
         }
 

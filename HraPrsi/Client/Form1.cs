@@ -27,7 +27,8 @@ namespace Client
             string playerName = UserNameInput.Text;
             networking.CreateSession(playerName);
             SessionCodeInput.Text = networking.sessionName;
-            var myForm = new GUI();
+
+            var myForm = new GUI(networking);
             myForm.Show();
         }
 
@@ -38,7 +39,7 @@ namespace Client
             string playerName = UserNameInput.Text;
             networking.JoinSession(sessionName, playerName);
            */
-            var myForm = new GUI();
+            var myForm = new GUI(networking);
             myForm.Show();
         }
 

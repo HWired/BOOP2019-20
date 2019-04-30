@@ -21,9 +21,13 @@ namespace Client
         Bitmap[,] hraciKarty = new Bitmap [4,13];
         Bitmap obrazek;
 
-        public GUI()
+        Networking networking;
+
+        public GUI(Networking networking)
         {
             InitializeComponent();
+            this.networking = networking;
+
             Nahraj();
 
             prirazeniJmen();
@@ -79,7 +83,7 @@ namespace Client
             //[2][x] Piky
             //[3][x] Krize
             //[4][1-2]  Back,TestKarta  
-/*
+
             hraciKarty[0,0] = Resources.Kary2;
             hraciKarty[0,1] = Resources.Kary3;
             hraciKarty[0,2] = Resources.Kary4;
@@ -137,7 +141,7 @@ namespace Client
             hraciKarty[3,12] = Resources.Kriz2;
 
             
-            */
+            
             
 
           
@@ -163,8 +167,6 @@ namespace Client
 
         private void daniKarty(PictureBox karta)
         {
-
-
             if(karta.Visible == false && kartaRozdana == false)
             {
                 karta.Image = (Image)obrazek;
@@ -175,8 +177,6 @@ namespace Client
 
         private void daniJmena(Label jmeno,string Nick)
         {
-
-
             if (jmeno.Visible == false && jmenoDano == false)
             {
                 jmeno.Text = Nick;

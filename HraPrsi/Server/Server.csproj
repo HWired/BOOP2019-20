@@ -71,6 +71,8 @@
     <Content Include="WebService.asmx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\ListOperations.cs" />
+    <Compile Include="Common\RandomCardDeck.cs" />
     <Compile Include="Common\RandomString.cs" />
     <Compile Include="DataStructures\AppState.cs" />
     <Compile Include="DataStructures\Card.cs" />

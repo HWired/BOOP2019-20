@@ -89,7 +89,6 @@ namespace Client
         {
             appState = service.GetState(sessionName);
 
-            if (lastAppState == null)
             if(!PlayersUpdated(lastAppState.players, appState.players))
             {
                 OnPlayersChanged(appState.players);
@@ -136,10 +135,16 @@ namespace Client
             return null;
         }
 
+        public void OnGameReady ()
+        {
+            OnPlayersChanged(appState.players);
+        }
+
         // voláno při změně počtu hráčů tj. někdo přišel / odešel
         private void OnPlayersChanged (Player[] players)
         {
             Console.WriteLine("Someone joined or leaved");
+            gameGUI.UpdatePlayerListInvoke(players);
             // update list of players (GUI)
         }
 

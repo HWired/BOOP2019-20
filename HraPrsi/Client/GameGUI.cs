@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Client.Properties;
+using Client.PrsiService;
 
 namespace Client
 {
@@ -15,7 +16,6 @@ namespace Client
     {
         bool ulozenikarty = false;
         bool kartaRozdana = false;
-        bool jmenoDano = false;
         PictureBox predeslaKarta = null;
         PictureBox vybranakarta = null;
         Bitmap[,] hraciKarty = new Bitmap [4,13];
@@ -27,10 +27,39 @@ namespace Client
         {
             InitializeComponent();
             this.networking = networking;
+            networking.gameGUI = this;
+
+            networking.OnGameReady();
 
             Nahraj();
+        }
 
-            prirazeniJmen();
+        public void UpdatePlayerList (Player[] players)
+        {
+            PlayerBox.Controls.Clear();
+
+            int y = 24;
+            foreach (Player player in players)
+            {
+                Label playerLabel = new Label();
+                playerLabel.Text = player.name;
+                playerLabel.Location = new Point(24, y);
+                PlayerBox.Controls.Add(playerLabel);
+
+                y += 24;
+            }
+
+            Console.WriteLine("### GUI CALLING!!!!");
+        }
+
+        public void UpdatePlayerListInvoke (Player[] players)
+        {
+            if (PlayerBox.InvokeRequired)
+                PlayerBox.Invoke(new MethodInvoker(delegate {
+                    UpdatePlayerList(players);
+                }));
+            else
+                UpdatePlayerList(players);
         }
 
         private void Hrajkartu_Click(object sender, EventArgs e)
@@ -40,10 +69,6 @@ namespace Client
             vybranakarta.Image = null;
         }
 
-        private void prirazeniJmen()
-        {
-            daniJmena(label1,"Test");
-        }
 
         private void Tahnikartu_Click(object sender, EventArgs e)
         {
@@ -164,16 +189,6 @@ namespace Client
                 karta.Image = (Image)obrazek;
                 karta.Visible = true;
                 kartaRozdana = true;
-            }
-        }
-
-        private void daniJmena(Label jmeno,string Nick)
-        {
-            if (jmeno.Visible == false && jmenoDano == false)
-            {
-                jmeno.Text = Nick;
-                jmeno.Visible = true;
-                jmenoDano = true;
             }
         }
     }

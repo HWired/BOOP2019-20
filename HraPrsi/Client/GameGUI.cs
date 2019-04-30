@@ -28,8 +28,7 @@ namespace Client
             InitializeComponent();
             this.networking = networking;
             networking.gameGUI = this;
-
-            networking.OnGameReady();
+            networking.OnGameWindowReady();
 
             Nahraj();
         }
@@ -52,13 +51,19 @@ namespace Client
 
         public void OnGameStart()
         {
+            networking.LoadState();
+
             if (StartGameBtn.InvokeRequired)
                 StartGameBtn.Invoke(new MethodInvoker(delegate {
+                    LeaveRoomBtn.Enabled = false;
+                    LeaveRoomBtn.Visible = false;
                     StartGameBtn.Enabled = false;
                     StartGameBtn.Visible = false;
                 }));
             else
             {
+                LeaveRoomBtn.Enabled = false;
+                LeaveRoomBtn.Visible = false;
                 StartGameBtn.Enabled = false;
                 StartGameBtn.Visible = false;
             }

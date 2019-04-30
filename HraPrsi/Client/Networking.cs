@@ -70,8 +70,11 @@ namespace Client
             {
                 Console.WriteLine("Player: " + player.name + ", isCreator: " + player.isCreator);
             }
-            Console.WriteLine("# CARDS: ");
-            foreach (Card card in appState.cardStack)
+
+            Console.WriteLine($"Card on the table: {appState.cardPlayed.type}     {appState.cardPlayed.color}        {appState.cardPlayed.value}");
+
+            Console.WriteLine("My cards");
+            foreach (Card card in me.cards)
             {
                 Console.WriteLine($"{card.type}     {card.color}        {card.value}");
             }
@@ -135,20 +138,17 @@ namespace Client
             return null;
         }
 
-        public void OnGameReady ()
+        public void OnGameWindowReady ()
         {
             OnPlayersChanged(appState.players);
         }
 
-        // voláno při změně počtu hráčů tj. někdo přišel / odešel
         private void OnPlayersChanged (Player[] players)
         {
-            Console.WriteLine("Someone joined or leaved");
+            Console.WriteLine("Someone joined the room.");
             gameGUI.UpdatePlayerListInvoke(players);
-            // update list of players (GUI)
         }
 
-        // voláno při změně stavu hry (na začátku a na konci hry)
         private void OnGameStateChanged (bool gameStarted)
         {
             if (gameStarted)

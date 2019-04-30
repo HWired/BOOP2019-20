@@ -83,7 +83,22 @@ namespace Server
             Player player = appState.players.Find(p => p.id == playerID);
 
             if (player.isCreator)
+            {
                 appState.StartGame();
+
+                // add cards to each player
+                foreach (Player playerIterator in appState.players)
+                {
+                    List<Card> selectedCards = appState.cardStack.GetRange(0, 4);
+                    playerIterator.cards.AddRange(selectedCards);
+                    appState.cardStack.RemoveRange(0, 4);
+                }
+
+                // turn 1 card on the table
+                Card selectedCard = appState.cardStack.First();
+                appState.SetPlayedCard(selectedCard);
+                appState.cardStack.RemoveAt(0);
+            }
 
             SaveSession(sessionName);
         }

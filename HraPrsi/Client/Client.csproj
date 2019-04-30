@@ -66,7 +66,7 @@
     <Compile Include="GUI.Designer.cs">
       <DependentUpon>GUI.cs</DependentUpon>
     </Compile>
-    <Compile Include="Networking\SessionManager.cs" />
+    <Compile Include="Networking.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
@@ -94,7 +94,22 @@
     <None Include="Connected Services\PrsiService\Client.PrsiService.JoinSessionResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Connected Services\PrsiService\Client.PrsiService.LeaveSessionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\PrsiService\Client.PrsiService.PlayCardResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\PrsiService\Client.PrsiService.RegisterSessionInfo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\PrsiService\Client.PrsiService.RegisterSessionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\PrsiService\Client.PrsiService.SkipTurnResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\PrsiService\Client.PrsiService.StartGameResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\PrsiService\WebService.wsdl" />

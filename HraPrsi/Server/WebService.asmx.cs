@@ -18,47 +18,154 @@ namespace Server
     // [System.Web.Script.Services.ScriptService]
     public class WebService : System.Web.Services.WebService
     {
+        private AppState appState;
+        private string sessionName;
+
         [WebMethod]
-        public string RegisterSession (string playerName)
+        public RegisterSessionInfo RegisterSession (string playerName)
         {
+            RegisterSessionInfo registerSessionInfo = new RegisterSessionInfo();
             string sessionName = RandomString.Generate(5);
-            AppState appState = CreateState(sessionName);
-            AddPlayer(appState, playerName, true);
+            registerSessionInfo.sessionName = sessionName;
 
-            return sessionName;
+            CreateState(sessionName);
+            registerSessionInfo.playerID = AddPlayer(playerName, true);
+            SaveSession(sessionName);
+
+            return registerSessionInfo;
         }
 
         [WebMethod]
-        public void JoinSession (string sessionName, string playerName)
+        public int JoinSession (string sessionName, string playerName)
         {
-            AppState appState = GetState(sessionName);
-            AddPlayer(appState, playerName, false);
+            LoadSession(sessionName);
+            int playerID = AddPlayer(playerName, false);
+            SaveSession(sessionName);
+
+            return playerID;
         }
 
-        public void LeaveSession (string sessionName, string playerName)
-        {
-            AppState appState = GetState(sessionName);
-            RemovePlayer(appState, playerName);
-        }
-
-        private void AddPlayer(AppState appState, string playerName, bool isCreator)
+        public int AddPlayer(string name, bool isCreator)
         {
             Player newPlayer = new Player();
-            newPlayer.SetName(playerName);
-            newPlayer.SetCreator(isCreator);
-            appState.players.Add(newPlayer);
+            newPlayer.name = name;
+            newPlayer.isCreator = isCreator;
+            appState.AddPlayer(newPlayer);
+
+            return newPlayer.id;
         }
 
-        private void RemovePlayer(AppState appState, string playerName)
+        [WebMethod]
+        public void LeaveSession (string sessionName, int playerID)
         {
-            Player player = appState.players.Find(p => p.name == playerName);
+            LoadSession(sessionName);
+            RemovePlayer(playerID);
+            SaveSession(sessionName);
+        }
+
+        private void RemovePlayer (int playerID)
+        {
+            Player player = appState.players.Find(p => p.id == playerID);
             appState.players.Remove(player);
         }
 
-        private AppState CreateState(string sessionName)
+        [WebMethod]
+        public void StartGame (string sessionName, int playerID)
+        {
+            LoadSession(sessionName);
+            Player player = appState.players.Find(p => p.id == playerID);
+
+            if (player.isCreator)
+                appState.StartGame();
+
+            SaveSession(sessionName);
+        }
+        
+        [WebMethod]
+        public void PlayCard (string sessionName, string playerName, Card card)
+        {
+            LoadSession(sessionName);
+
+            Player player = appState.players.Find(p => p.name == playerName);
+
+            if (IsPlayersTurn(player))
+            {
+                if (CardCanBePlayed(player, card))
+                {
+                    if (CheckCardWithRules(card))
+                    {
+                        appState.SetPlayedCard(card);
+                        player.cards.Remove(card);
+                        NextPlayer(sessionName);
+
+                        SaveSession(sessionName);
+                    }
+                }
+            }
+        }
+
+        private bool IsPlayersTurn (Player player)
+        {
+            // there should not be id
+            if (appState.playerTurn % player.id == 0)
+                return true;
+
+            return false;
+        }
+
+        private bool CardCanBePlayed (Player player, Card card)
+        {
+            if (player.cards.Contains(card))
+                return true;
+
+            return false;
+        }
+
+        private bool CheckCardWithRules (Card card)
+        {
+            // Same color? Pass
+            if (appState.cardPlayed.color == card.color && card.value != CardValue.CA)
+                return true;
+
+            // Same value? Pass
+            if (appState.cardPlayed.value == card.value)
+                return true;
+
+            return false;
+        }
+
+        private void NextPlayer (string sessionName)
+        {
+            //appState.playerTurn += 1;
+            //appState.playerTurn = appState.playerTurn % appState.players.Count;
+        }
+
+        [WebMethod]
+        public void SkipTurn (string sessionName, string playerName)
+        {
+            LoadSession(sessionName);
+
+            Player player = appState.players.Find(p => p.name == playerName);
+
+            if (IsPlayersTurn(player))
+            {
+                appState.players.ElementAt(appState.playerTurn).cards.Add(appState.cardStack.ElementAt(0));
+                appState.cardStack.RemoveAt(0);
+
+                SaveSession(sessionName);
+            }
+        }
+
+        private void LoadSession (string sessionName)
+        {
+            this.sessionName = sessionName;
+            appState = GetState(sessionName);
+        }
+
+        private void CreateState (string sessionName)
         {
             Application[sessionName] = new AppState();
-            return (AppState)Application[sessionName];
+            LoadSession(sessionName);
         }
 
         [WebMethod]
@@ -67,94 +174,12 @@ namespace Server
             return (AppState)Application[sessionName];
         }
 
-        private bool SaveState (AppState appState, string sessionName)
+        private bool SaveSession (string sessionName)
         {
             Application[sessionName] = appState;
 
             if (Application[sessionName] != null) return true;
             else return false;
-        }
-
-        [WebMethod]
-        public void StartGame (string sessionName, string playerName)
-        {
-            AppState appState = GetState(sessionName);
-
-            Player player = appState.players.Find(p => p.name == playerName);
-
-            if (player.isCreator)
-                appState.gameStarted = true;
-
-            SaveState(appState, sessionName);
-        }
-        
-        [WebMethod]
-        public void PlayCard (string sessionName, string playerName, Card card)
-        {
-            AppState appState = GetState(sessionName);
-            Player player = appState.players.Find(p => p.name == playerName);
-
-            if (IsPlayersTurn(appState, player))
-            {
-                if (CardCanBePlayed(appState, player, card))
-                {
-                    if (CheckCardWithRules(appState, card))
-                    {
-                        appState.topCardStackPlayed = card;
-                        NextPlayer(sessionName, appState);
-                    }
-                }
-            }
-        }
-
-        private bool IsPlayersTurn (AppState appState, Player player)
-        {
-            if (appState.playerTurn % player.order == 0)
-                return true;
-
-            return false;
-        }
-
-        private bool CardCanBePlayed (AppState appState, Player player, Card card)
-        {
-            if (player.cards.Contains(card))
-                return true;
-
-            return false;
-        }
-
-        private bool CheckCardWithRules (AppState appState, Card card)
-        {
-            // Same color? Pass
-            if (appState.topCardStackPlayed.color == card.color && card.value != CardValue.CA)
-                return true;
-
-            // Same value? Pass
-            if (appState.topCardStackPlayed.value == card.value)
-                return true;
-
-            return false;
-        }
-
-        private void NextPlayer (string sessionName, AppState appState)
-        {
-            appState.playerTurn += 1;
-            appState.playerTurn = appState.playerTurn % appState.players.Count;
-            SaveState(appState, sessionName);
-        }
-
-        [WebMethod]
-        private void SkipTurn (string sessionName, string playerName)
-        {
-            AppState appState = GetState(sessionName);
-            Player player = appState.players.Find(p => p.name == playerName);
-
-            if (IsPlayersTurn(appState, player))
-            {
-                appState.players.ElementAt(appState.playerTurn).cards.Add(appState.cardStack.ElementAt(0));
-                appState.cardStack.RemoveAt(0);
-                SaveState(appState, sessionName);
-            }
         }
     }
 }

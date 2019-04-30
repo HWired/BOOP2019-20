@@ -1,23 +1,29 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Security.Cryptography;
 
 namespace Server.DataStructures
 {
     public class Player
     {
+        public int id { get; private set; }
         public string name = "";
         public List<Card> cards = new List<Card>();
         public bool isCreator = false;
 
-        public int order = -1;
-
-        public void SetCreator(bool isCreator)
+        public Player ()
         {
-            this.isCreator = isCreator;
+            id = GenerateID();
         }
 
-        public void SetName (string playerName)
+        private int GenerateID()
         {
-            name = playerName;
+            using (RNGCryptoServiceProvider rg = new RNGCryptoServiceProvider())
+            {
+                byte[] rno = new byte[4];
+                rg.GetBytes(rno);
+                return Math.Abs(BitConverter.ToInt32(rno, 0));
+            }
         }
     }
 }

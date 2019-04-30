@@ -779,8 +779,8 @@ namespace Client.PrsiService {
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
         public string sessionName;
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
-        public string playerName;
+        [System.Runtime.Serialization.DataMemberAttribute(Order=1)]
+        public int playerID;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
         public Client.PrsiService.Card card;
@@ -788,9 +788,9 @@ namespace Client.PrsiService {
         public PlayCardRequestBody() {
         }
         
-        public PlayCardRequestBody(string sessionName, string playerName, Client.PrsiService.Card card) {
+        public PlayCardRequestBody(string sessionName, int playerID, Client.PrsiService.Card card) {
             this.sessionName = sessionName;
-            this.playerName = playerName;
+            this.playerID = playerID;
             this.card = card;
         }
     }
@@ -1091,11 +1091,11 @@ namespace Client.PrsiService {
             return base.Channel.PlayCard(request);
         }
         
-        public void PlayCard(string sessionName, string playerName, Client.PrsiService.Card card) {
+        public void PlayCard(string sessionName, int playerID, Client.PrsiService.Card card) {
             Client.PrsiService.PlayCardRequest inValue = new Client.PrsiService.PlayCardRequest();
             inValue.Body = new Client.PrsiService.PlayCardRequestBody();
             inValue.Body.sessionName = sessionName;
-            inValue.Body.playerName = playerName;
+            inValue.Body.playerID = playerID;
             inValue.Body.card = card;
             Client.PrsiService.PlayCardResponse retVal = ((Client.PrsiService.WebServiceSoap)(this)).PlayCard(inValue);
         }
@@ -1105,11 +1105,11 @@ namespace Client.PrsiService {
             return base.Channel.PlayCardAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Client.PrsiService.PlayCardResponse> PlayCardAsync(string sessionName, string playerName, Client.PrsiService.Card card) {
+        public System.Threading.Tasks.Task<Client.PrsiService.PlayCardResponse> PlayCardAsync(string sessionName, int playerID, Client.PrsiService.Card card) {
             Client.PrsiService.PlayCardRequest inValue = new Client.PrsiService.PlayCardRequest();
             inValue.Body = new Client.PrsiService.PlayCardRequestBody();
             inValue.Body.sessionName = sessionName;
-            inValue.Body.playerName = playerName;
+            inValue.Body.playerID = playerID;
             inValue.Body.card = card;
             return ((Client.PrsiService.WebServiceSoap)(this)).PlayCardAsync(inValue);
         }

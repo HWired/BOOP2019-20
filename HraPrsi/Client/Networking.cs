@@ -154,6 +154,8 @@ namespace Client
             if (gameStarted)
             {
                 gameGUI.OnGameStart();
+                gameGUI.UpdatePlayedCard(appState.cardPlayed);
+                gameGUI.UpdatePlayerCards(GetMyPlayer(appState.players).cards);
                 Console.WriteLine("Game just started");
             }
             else
@@ -165,10 +167,12 @@ namespace Client
         // voláno potom co někdo táhne/přeskočí kartu
         private void OnTurnChanged (Player player, int playerIndex)
         {
+            gameGUI.UpdatePlayerCards(player.cards);
             Console.WriteLine(player.name);
             if (player.id == playerIndex && player.id == this.playerID)
             {
                 Console.WriteLine("My turn");
+
             }
 
             // update list of players (GUI)
@@ -187,13 +191,13 @@ namespace Client
         /* zavolat, když chci hrát kartu
          * sessionManager.PlayCard(SessionManager.appState.cardStack.ElementAt(3)); - z GUI.cs
         */
-        private void PlayCard (Card card)
+        public void PlayCard (Card card)
         {
-            //service.PlayCard(sessionName, myName, card);
+            service.PlayCard(sessionName, this.playerID, card);
         }
 
         // zavolat, když chci přeskočit můj tah
-        private void SkipTurn ()
+        public void SkipTurn ()
         {
             //service.SkipTurn(sessionName, myName);
         }

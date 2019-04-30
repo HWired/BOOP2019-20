@@ -104,11 +104,11 @@ namespace Server
         }
         
         [WebMethod]
-        public void PlayCard (string sessionName, string playerName, Card card)
+        public void PlayCard (string sessionName, int playerID, Card card)
         {
             LoadSession(sessionName);
 
-            Player player = appState.players.Find(p => p.name == playerName);
+            Player player = appState.players.Find(p => p.id == playerID);
 
             if (IsPlayersTurn(player))
             {

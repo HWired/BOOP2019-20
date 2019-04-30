@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Client.DataStructures;
 using Client.Properties;
 using Client.PrsiService;
 
@@ -15,11 +16,17 @@ namespace Client
     public partial class GameGUI : Form
     {
         bool ulozenikarty = false;
+        // to check something
         bool kartaRozdana = false;
+
+        // previously selected card
         PictureBox predeslaKarta = null;
+        // selected card - this interests me
         PictureBox vybranakarta = null;
+
+        // hraciKarty[0,0] = Resources.Kary2;
         Bitmap[,] hraciKarty = new Bitmap [4,13];
-        Bitmap obrazek;
+        Bitmap newCard;
 
         Networking networking;
 
@@ -29,8 +36,6 @@ namespace Client
             this.networking = networking;
             networking.gameGUI = this;
             networking.OnGameWindowReady();
-
-            Nahraj();
         }
 
         public void UpdatePlayerList (Player[] players)
@@ -47,6 +52,103 @@ namespace Client
 
                 y += 24;
             }
+        }
+
+        public void UpdatePlayedCard (Card card)
+        {
+            ClientCard cardPicture = new ClientCard();
+            cardPicture.card = card;
+            cardPicture.Image = CardToImage(card);
+            cardPicture.Location = new Point(600, 210);
+            cardPicture.Anchor = AnchorStyles.Bottom;
+            cardPicture.SizeMode = PictureBoxSizeMode.StretchImage;
+            cardPicture.Size = new Size(154, 194);
+
+            if (this.InvokeRequired) this.Invoke(new MethodInvoker(delegate { Controls.Add(cardPicture); }));
+            else Controls.Add(cardPicture);
+        }
+
+        public void UpdatePlayerCards (Card[] cards)
+        {
+            int x = 98;
+            foreach (Card card in cards)
+            {
+                ClientCard cardPicture = new ClientCard();
+                cardPicture.card = card;
+                cardPicture.Image = CardToImage(card);
+                cardPicture.Location = new Point(x, 508);
+                cardPicture.Anchor = AnchorStyles.Bottom;
+                cardPicture.SizeMode = PictureBoxSizeMode.StretchImage;
+                cardPicture.Size = new Size(154, 194);
+
+                cardPicture.Click += Card_Click;
+
+                if (this.InvokeRequired) this.Invoke(new MethodInvoker(delegate {Controls.Add(cardPicture);}));
+                else Controls.Add(cardPicture);
+
+                x += 59;
+            }
+        }
+
+        private Image CardToImage (Card card)
+        {
+            if (card.type == CardType.Diamond && card.value == CardValue.CA) return Resources.KaryA;
+            if (card.type == CardType.Diamond && card.value == CardValue.C2) return Resources.Kary2;
+            if (card.type == CardType.Diamond && card.value == CardValue.C3) return Resources.Kary3;
+            if (card.type == CardType.Diamond && card.value == CardValue.C4) return Resources.Kary4;
+            if (card.type == CardType.Diamond && card.value == CardValue.C5) return Resources.Kary5;
+            if (card.type == CardType.Diamond && card.value == CardValue.C6) return Resources.Kary6;
+            if (card.type == CardType.Diamond && card.value == CardValue.C7) return Resources.Kary7;
+            if (card.type == CardType.Diamond && card.value == CardValue.C8) return Resources.Kary8;
+            if (card.type == CardType.Diamond && card.value == CardValue.C9) return Resources.Kary9;
+            if (card.type == CardType.Diamond && card.value == CardValue.C10) return Resources.Kary10;
+            if (card.type == CardType.Diamond && card.value == CardValue.CJ) return Resources.KaryJ;
+            if (card.type == CardType.Diamond && card.value == CardValue.CQ) return Resources.KaryQ;
+            if (card.type == CardType.Diamond && card.value == CardValue.CK) return Resources.KaryK;
+
+            if (card.type == CardType.Heart && card.value == CardValue.CA) return Resources.SrdceA;
+            if (card.type == CardType.Heart && card.value == CardValue.C2) return Resources.Srdce2;
+            if (card.type == CardType.Heart && card.value == CardValue.C3) return Resources.Srdce3;
+            if (card.type == CardType.Heart && card.value == CardValue.C4) return Resources.Srdce4;
+            if (card.type == CardType.Heart && card.value == CardValue.C5) return Resources.Srdce5;
+            if (card.type == CardType.Heart && card.value == CardValue.C6) return Resources.Srdce6;
+            if (card.type == CardType.Heart && card.value == CardValue.C7) return Resources.Srdce7;
+            if (card.type == CardType.Heart && card.value == CardValue.C8) return Resources.Srdce8;
+            if (card.type == CardType.Heart && card.value == CardValue.C9) return Resources.Srdce9;
+            if (card.type == CardType.Heart && card.value == CardValue.C10) return Resources.Srdce10;
+            if (card.type == CardType.Heart && card.value == CardValue.CJ) return Resources.SrdceJ;
+            if (card.type == CardType.Heart && card.value == CardValue.CQ) return Resources.SrdceQ;
+            if (card.type == CardType.Heart && card.value == CardValue.CK) return Resources.SrdceK;
+
+            if (card.type == CardType.Leaf && card.value == CardValue.CA) return Resources.PikiA;
+            if (card.type == CardType.Leaf && card.value == CardValue.C2) return Resources.Piki2;
+            if (card.type == CardType.Leaf && card.value == CardValue.C3) return Resources.Piki3;
+            if (card.type == CardType.Leaf && card.value == CardValue.C4) return Resources.Piki4;
+            if (card.type == CardType.Leaf && card.value == CardValue.C5) return Resources.Piki5;
+            if (card.type == CardType.Leaf && card.value == CardValue.C6) return Resources.Piki6;
+            if (card.type == CardType.Leaf && card.value == CardValue.C7) return Resources.Piki7;
+            if (card.type == CardType.Leaf && card.value == CardValue.C8) return Resources.Piki8;
+            if (card.type == CardType.Leaf && card.value == CardValue.C9) return Resources.Piki9;
+            if (card.type == CardType.Leaf && card.value == CardValue.C10) return Resources.Piki10;
+            if (card.type == CardType.Leaf && card.value == CardValue.CJ) return Resources.PikiJ;
+            if (card.type == CardType.Leaf && card.value == CardValue.CQ) return Resources.PikiQ;
+            if (card.type == CardType.Leaf && card.value == CardValue.CK) return Resources.PikiK;
+
+            if (card.type == CardType.Acorn && card.value == CardValue.CA) return Resources.KrizA;
+            if (card.type == CardType.Acorn && card.value == CardValue.C2) return Resources.Kriz2;
+            if (card.type == CardType.Acorn && card.value == CardValue.C3) return Resources.Kriz3;
+            if (card.type == CardType.Acorn && card.value == CardValue.C4) return Resources.Kriz4;
+            if (card.type == CardType.Acorn && card.value == CardValue.C5) return Resources.Kriz5;
+            if (card.type == CardType.Acorn && card.value == CardValue.C6) return Resources.Kriz6;
+            if (card.type == CardType.Acorn && card.value == CardValue.C7) return Resources.Kriz7;
+            if (card.type == CardType.Acorn && card.value == CardValue.C8) return Resources.Kriz8;
+            if (card.type == CardType.Acorn && card.value == CardValue.C9) return Resources.Kriz9;
+            if (card.type == CardType.Acorn && card.value == CardValue.C10) return Resources.Kriz10;
+            if (card.type == CardType.Acorn && card.value == CardValue.CJ) return Resources.KrizJ;
+            if (card.type == CardType.Acorn && card.value == CardValue.CQ) return Resources.KrizQ;
+            if (card.type == CardType.Acorn && card.value == CardValue.CK) return Resources.KrizK;
+
+            return Resources.PrazdnaKarta;
         }
 
         public void OnGameStart()
@@ -79,118 +181,52 @@ namespace Client
                 UpdatePlayerList(players);
         }
 
-        private void Hrajkartu_Click(object sender, EventArgs e)
+        private void PlayCardBtn_Click(object sender, EventArgs e)
         {
-            OdlozenaKarta.Image = vybranakarta.Image;
+            Card card = new Card
+            {
+                color = CardColor.Red,
+                type = CardType.Acorn,
+                value = CardValue.C8,
+            };
+
+            networking.PlayCard(card);
+            PlayedCard.Image = vybranakarta.Image;
             vybranakarta.Visible = false;
             vybranakarta.Image = null;
         }
 
 
-        private void Tahnikartu_Click(object sender, EventArgs e)
+        private void SkipTurnBtn_Click(object sender, EventArgs e)
         {
-           
             kartaRozdana = false;
-            obrazek = new Bitmap(Nahraj(0,1));
-            daniKarty(Karta1);
-            daniKarty(Karta2);
-            daniKarty(Karta3);
-            daniKarty(Karta4);
-            daniKarty(Karta5);
-            daniKarty(Karta6);
-            daniKarty(Karta7);
-            daniKarty(Karta8);
-            daniKarty(Karta9);
-            daniKarty(Karta10);
-            daniKarty(pictureBox1);
-            daniKarty(pictureBox2);
-            daniKarty(pictureBox3);
-            daniKarty(pictureBox4);
-            daniKarty(pictureBox5);
-            daniKarty(pictureBox6);
-            daniKarty(pictureBox7);
-            daniKarty(pictureBox8);
+            newCard = new Bitmap(Resources.Kary10);
+            daniKarty(Card1);
+            daniKarty(Card2);
+            daniKarty(Card3);
+            daniKarty(Card4);
+            daniKarty(Card5);
+            daniKarty(Card6);
+            daniKarty(Card7);
+            daniKarty(Card8);
+            daniKarty(Card9);
+            daniKarty(Card10);
+            daniKarty(Card11);
+            daniKarty(Card12);
+            daniKarty(Card13);
+            daniKarty(Card14);
+            daniKarty(Card15);
+            daniKarty(Card16);
+            daniKarty(Card17);
+            daniKarty(Card18);
             
         }
 
-        private void Nahraj()
-        {
-            //Nacitam do pole kvuli randomizaci
-            // 0,1,2,3,4,5,6,7,8,9,10,11,12,13
-            // 2,3,4,5,6,7,8,9,10,J,Q,K,A
-            //[0][x] Kary
-            //[1][x] Srdce
-            //[2][x] Piky
-            //[3][x] Krize
-            //[4][1-2]  Back,TestKarta  
-
-            hraciKarty[0,0] = Resources.Kary2;
-            hraciKarty[0,1] = Resources.Kary3;
-            hraciKarty[0,2] = Resources.Kary4;
-            hraciKarty[0,3] = Resources.Kary5;
-            hraciKarty[0,4] = Resources.Kary6;
-            hraciKarty[0,5] = Resources.Kary7;
-            hraciKarty[0,6] = Resources.Kary8;
-            hraciKarty[0,7] = Resources.Kary9;
-            hraciKarty[0,8] = Resources.Kary10;
-            hraciKarty[0,9] = Resources.KaryJ;
-            hraciKarty[0,10] = Resources.KaryQ;
-            hraciKarty[0,11] = Resources.KaryK;
-            hraciKarty[0,12] = Resources.KaryA;
-
-            hraciKarty[1,0] = Resources.Srdce2;
-            hraciKarty[1,1] = Resources.Srdce2;
-            hraciKarty[1,2] = Resources.Srdce2;
-            hraciKarty[1,3] = Resources.Srdce2;
-            hraciKarty[1,4] = Resources.Srdce2;
-            hraciKarty[1,5] = Resources.Srdce2;
-            hraciKarty[1,6] = Resources.Srdce2;
-            hraciKarty[1,7] = Resources.Srdce2;
-            hraciKarty[1,8] = Resources.Srdce2;
-            hraciKarty[1,9] = Resources.Srdce2;
-            hraciKarty[1,10] = Resources.Srdce2;
-            hraciKarty[1,11] = Resources.Srdce2;
-            hraciKarty[1,12] = Resources.Srdce2;
-
-            hraciKarty[2,0] = Resources.Piki2;
-            hraciKarty[2,1] = Resources.Piki2;
-            hraciKarty[2,2] = Resources.Piki2;
-            hraciKarty[2,3] = Resources.Piki2;
-            hraciKarty[2,4] = Resources.Piki2;
-            hraciKarty[2,5] = Resources.Piki2;
-            hraciKarty[2,6] = Resources.Piki2;
-            hraciKarty[2,7] = Resources.Piki2;
-            hraciKarty[2,8] = Resources.Piki2;
-            hraciKarty[2,9] = Resources.Piki2;
-            hraciKarty[2,10] = Resources.Piki2;
-            hraciKarty[2,11] = Resources.Piki2;
-            hraciKarty[2,12] = Resources.Piki2;
-
-            hraciKarty[3,0] = Resources.Kriz2;
-            hraciKarty[3,1] = Resources.Kriz2;
-            hraciKarty[3,2] = Resources.Kriz2;
-            hraciKarty[3,3] = Resources.Kriz2;
-            hraciKarty[3,4] = Resources.Kriz2;
-            hraciKarty[3,5] = Resources.Kriz2;
-            hraciKarty[3,6] = Resources.Kriz2;
-            hraciKarty[3,7] = Resources.Kriz2;
-            hraciKarty[3,8] = Resources.Kriz2;
-            hraciKarty[3,9] = Resources.Kriz2;
-            hraciKarty[3,10] = Resources.Kriz2;
-            hraciKarty[3,11] = Resources.Kriz2;
-            hraciKarty[3,12] = Resources.Kriz2;
-        }
-        private Bitmap Nahraj(int random1,int random2)
-        {
-            return hraciKarty[random1,random2];
-
-        }
-        private void KliknulNaKartu(object sender, EventArgs e)
+        private void Card_Click(object sender, EventArgs e)
         {
             if (ulozenikarty)
             {
                 predeslaKarta.Location = new Point(predeslaKarta.Location.X, predeslaKarta.Location.Y + 50);
-
             }
             predeslaKarta = (PictureBox)sender;
             ulozenikarty = true;
@@ -199,11 +235,13 @@ namespace Client
 
         }
 
+        // obrazek??? what is that?
+        // inserts a new card into the stack (into the first place, kartaRozdana)
         private void daniKarty(PictureBox karta)
         {
             if(karta.Visible == false && kartaRozdana == false)
             {
-                karta.Image = (Image)obrazek;
+                karta.Image = (Image)newCard;
                 karta.Visible = true;
                 kartaRozdana = true;
             }

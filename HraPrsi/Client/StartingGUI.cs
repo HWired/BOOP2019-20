@@ -11,11 +11,11 @@ using System.Windows.Forms;
 
 namespace Client
 {
-    public partial class Form1 : Form
+    public partial class StartingGUI : Form
     {
         Networking networking = new Networking();
 
-        public Form1()
+        public StartingGUI()
         {
             InitializeComponent();
 
@@ -28,19 +28,21 @@ namespace Client
             networking.CreateSession(playerName);
             SessionCodeInput.Text = networking.sessionName;
 
-            var myForm = new GUI(networking);
-            myForm.Show();
+            var gameGUI = new GameGUI(networking);
+            networking.gameGUI = gameGUI;
+            gameGUI.Show();
         }
 
         private void JoinGameBtn_Click(object sender, EventArgs e)
         {
             
-           /* string sessionName = SessionCodeInput.Text;
+            string sessionName = SessionCodeInput.Text;
             string playerName = UserNameInput.Text;
             networking.JoinSession(sessionName, playerName);
-           */
-            var myForm = new GUI(networking);
-            myForm.Show();
+
+            var gameGUI = new GameGUI(networking);
+            networking.gameGUI = gameGUI;
+            gameGUI.Show();
         }
 
         private void GetStateBtn_Click(object sender, EventArgs e)

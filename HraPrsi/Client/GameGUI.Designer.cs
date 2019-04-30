@@ -1,6 +1,6 @@
 ﻿namespace Client
 {
-    partial class GUI
+    partial class GameGUI
     {
         /// <summary>
         /// Required designer variable.

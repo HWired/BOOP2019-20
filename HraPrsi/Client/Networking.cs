@@ -20,7 +20,8 @@ namespace Client
         private PrsiService.WebServiceSoapClient service;
         private System.Timers.Timer netSyncTimer;
 
-        public Form1 form;
+        public StartingGUI form;
+        public GameGUI gameGUI;
 
         public Networking ()
         {

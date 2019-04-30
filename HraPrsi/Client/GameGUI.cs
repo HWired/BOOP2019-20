@@ -11,10 +11,10 @@ using Client.Properties;
 
 namespace Client
 {
-    public partial class GUI : Form
+    public partial class GameGUI : Form
     {
         bool ulozenikarty = false;
-        bool kartaRozdana = false ;
+        bool kartaRozdana = false;
         bool jmenoDano = false;
         PictureBox predeslaKarta = null;
         PictureBox vybranakarta = null;
@@ -23,7 +23,7 @@ namespace Client
 
         Networking networking;
 
-        public GUI(Networking networking)
+        public GameGUI(Networking networking)
         {
             InitializeComponent();
             this.networking = networking;
@@ -38,8 +38,6 @@ namespace Client
             OdlozenaKarta.Image = vybranakarta.Image;
             vybranakarta.Visible = false;
             vybranakarta.Image = null;
-            
-
         }
 
         private void prirazeniJmen()
@@ -139,12 +137,6 @@ namespace Client
             hraciKarty[3,10] = Resources.Kriz2;
             hraciKarty[3,11] = Resources.Kriz2;
             hraciKarty[3,12] = Resources.Kriz2;
-
-            
-            
-            
-
-          
         }
         private Bitmap Nahraj(int random1,int random2)
         {

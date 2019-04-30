@@ -167,13 +167,18 @@ namespace Client
         // voláno potom co někdo táhne/přeskočí kartu
         private void OnTurnChanged (Player player, int playerIndex)
         {
-            gameGUI.UpdatePlayerCards(player.cards);
-            Console.WriteLine(player.name);
-            if (player.id == playerIndex && player.id == this.playerID)
-            {
-                Console.WriteLine("My turn");
+            gameGUI.UpdatePlayedCard(appState.cardPlayed);
+            gameGUI.UpdatePlayerCards(GetMyPlayer(appState.players).cards);
 
+            if (player.id == appState.players.ElementAt(playerIndex).id && player.id == this.playerID)
+            {
+                Console.WriteLine($"My turn: {player.name}");
+            } else
+            {
+                Console.WriteLine($"Player turn: {player.name}");
             }
+
+            LoadState();
 
             // update list of players (GUI)
         }
@@ -199,7 +204,7 @@ namespace Client
         // zavolat, když chci přeskočit můj tah
         public void SkipTurn ()
         {
-            //service.SkipTurn(sessionName, myName);
+            service.SkipTurn(sessionName, this.playerID);
         }
     }
 }

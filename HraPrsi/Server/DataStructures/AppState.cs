@@ -11,7 +11,7 @@ namespace Server.DataStructures
         public Card cardPlayed { get; private set; } = new Card();
 
         public bool gameStarted { get; private set; } = false;
-        public int playerTurn { get; private set; } = 0;
+        public int playerTurn { get; set; } = 0;
 
         public void StartGame ()
         {

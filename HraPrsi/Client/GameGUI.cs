@@ -22,7 +22,7 @@ namespace Client
         // previously selected card
         PictureBox predeslaKarta = null;
         // selected card - this interests me
-        PictureBox vybranakarta = null;
+        ClientCard selectedCard = null;
 
         // hraciKarty[0,0] = Resources.Kary2;
         Bitmap[,] hraciKarty = new Bitmap [4,13];
@@ -70,21 +70,26 @@ namespace Client
 
         public void UpdatePlayerCards (Card[] cards)
         {
+            // clear box
+            if (CardBox.InvokeRequired) this.Invoke(new MethodInvoker(delegate { CardBox.Controls.Clear(); }));
+            else CardBox.Controls.Clear();
+            
+
             int x = 98;
             foreach (Card card in cards)
             {
                 ClientCard cardPicture = new ClientCard();
                 cardPicture.card = card;
                 cardPicture.Image = CardToImage(card);
-                cardPicture.Location = new Point(x, 508);
+                cardPicture.Location = new Point(x, 50);
                 cardPicture.Anchor = AnchorStyles.Bottom;
                 cardPicture.SizeMode = PictureBoxSizeMode.StretchImage;
                 cardPicture.Size = new Size(154, 194);
 
                 cardPicture.Click += Card_Click;
 
-                if (this.InvokeRequired) this.Invoke(new MethodInvoker(delegate {Controls.Add(cardPicture);}));
-                else Controls.Add(cardPicture);
+                if (CardBox.InvokeRequired) this.Invoke(new MethodInvoker(delegate {CardBox.Controls.Add(cardPicture);}));
+                else CardBox.Controls.Add(cardPicture);
 
                 x += 59;
             }
@@ -183,43 +188,18 @@ namespace Client
 
         private void PlayCardBtn_Click(object sender, EventArgs e)
         {
-            Card card = new Card
-            {
-                color = CardColor.Red,
-                type = CardType.Acorn,
-                value = CardValue.C8,
-            };
-
-            networking.PlayCard(card);
-            PlayedCard.Image = vybranakarta.Image;
-            vybranakarta.Visible = false;
-            vybranakarta.Image = null;
+            Console.WriteLine($"Right now am playin card: {selectedCard.card.type}, {selectedCard.card.color}, {selectedCard.card.value}");
+            networking.PlayCard(selectedCard.card);
+            networking.LoadState();
+            //PlayedCard.Image = selectedCard.Image;
+            //selectedCard.Visible = false;
+            //selectedCard.Image = null;
         }
 
 
         private void SkipTurnBtn_Click(object sender, EventArgs e)
         {
-            kartaRozdana = false;
-            newCard = new Bitmap(Resources.Kary10);
-            daniKarty(Card1);
-            daniKarty(Card2);
-            daniKarty(Card3);
-            daniKarty(Card4);
-            daniKarty(Card5);
-            daniKarty(Card6);
-            daniKarty(Card7);
-            daniKarty(Card8);
-            daniKarty(Card9);
-            daniKarty(Card10);
-            daniKarty(Card11);
-            daniKarty(Card12);
-            daniKarty(Card13);
-            daniKarty(Card14);
-            daniKarty(Card15);
-            daniKarty(Card16);
-            daniKarty(Card17);
-            daniKarty(Card18);
-            
+            networking.SkipTurn();
         }
 
         private void Card_Click(object sender, EventArgs e)
@@ -230,8 +210,8 @@ namespace Client
             }
             predeslaKarta = (PictureBox)sender;
             ulozenikarty = true;
-            vybranakarta = (PictureBox)sender;
-            vybranakarta.Location = new Point(vybranakarta.Location.X, vybranakarta.Location.Y - 50);
+            selectedCard = ((ClientCard)sender);
+            selectedCard.Location = new Point(selectedCard.Location.X, selectedCard.Location.Y - 50);
 
         }
 

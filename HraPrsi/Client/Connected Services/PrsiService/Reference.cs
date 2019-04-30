@@ -848,15 +848,15 @@ namespace Client.PrsiService {
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
         public string sessionName;
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
-        public string playerName;
+        [System.Runtime.Serialization.DataMemberAttribute(Order=1)]
+        public int playerID;
         
         public SkipTurnRequestBody() {
         }
         
-        public SkipTurnRequestBody(string sessionName, string playerName) {
+        public SkipTurnRequestBody(string sessionName, int playerID) {
             this.sessionName = sessionName;
-            this.playerName = playerName;
+            this.playerID = playerID;
         }
     }
     
@@ -1119,11 +1119,11 @@ namespace Client.PrsiService {
             return base.Channel.SkipTurn(request);
         }
         
-        public void SkipTurn(string sessionName, string playerName) {
+        public void SkipTurn(string sessionName, int playerID) {
             Client.PrsiService.SkipTurnRequest inValue = new Client.PrsiService.SkipTurnRequest();
             inValue.Body = new Client.PrsiService.SkipTurnRequestBody();
             inValue.Body.sessionName = sessionName;
-            inValue.Body.playerName = playerName;
+            inValue.Body.playerID = playerID;
             Client.PrsiService.SkipTurnResponse retVal = ((Client.PrsiService.WebServiceSoap)(this)).SkipTurn(inValue);
         }
         
@@ -1132,11 +1132,11 @@ namespace Client.PrsiService {
             return base.Channel.SkipTurnAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Client.PrsiService.SkipTurnResponse> SkipTurnAsync(string sessionName, string playerName) {
+        public System.Threading.Tasks.Task<Client.PrsiService.SkipTurnResponse> SkipTurnAsync(string sessionName, int playerID) {
             Client.PrsiService.SkipTurnRequest inValue = new Client.PrsiService.SkipTurnRequest();
             inValue.Body = new Client.PrsiService.SkipTurnRequestBody();
             inValue.Body.sessionName = sessionName;
-            inValue.Body.playerName = playerName;
+            inValue.Body.playerID = playerID;
             return ((Client.PrsiService.WebServiceSoap)(this)).SkipTurnAsync(inValue);
         }
         

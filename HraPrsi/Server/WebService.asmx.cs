@@ -112,16 +112,12 @@ namespace Server
 
             if (IsPlayersTurn(player))
             {
-                if (CardCanBePlayed(player, card))
+                if (CheckCardWithRules(card))
                 {
-                    if (CheckCardWithRules(card))
-                    {
-                        appState.SetPlayedCard(card);
-                        player.cards.Remove(card);
-                        NextPlayer(sessionName);
-
-                        SaveSession(sessionName);
-                    }
+                    appState.SetPlayedCard(card);
+                    appState.players.ElementAt(appState.playerTurn).cards.Remove(card);
+                    NextPlayer(sessionName);
+                    SaveSession(sessionName);
                 }
             }
         }
@@ -129,15 +125,7 @@ namespace Server
         private bool IsPlayersTurn (Player player)
         {
             // there should not be id
-            if (appState.playerTurn % player.id == 0)
-                return true;
-
-            return false;
-        }
-
-        private bool CardCanBePlayed (Player player, Card card)
-        {
-            if (player.cards.Contains(card))
+            if (appState.players.ElementAt(appState.playerTurn).id == player.id)
                 return true;
 
             return false;
@@ -158,22 +146,22 @@ namespace Server
 
         private void NextPlayer (string sessionName)
         {
-            //appState.playerTurn += 1;
-            //appState.playerTurn = appState.playerTurn % appState.players.Count;
+            appState.playerTurn += 1;
+            appState.playerTurn = appState.playerTurn % appState.players.Count;
         }
 
         [WebMethod]
-        public void SkipTurn (string sessionName, string playerName)
+        public void SkipTurn (string sessionName, int playerID)
         {
             LoadSession(sessionName);
 
-            Player player = appState.players.Find(p => p.name == playerName);
+            Player player = appState.players.Find(p => p.id == playerID);
 
             if (IsPlayersTurn(player))
             {
                 appState.players.ElementAt(appState.playerTurn).cards.Add(appState.cardStack.ElementAt(0));
                 appState.cardStack.RemoveAt(0);
-
+                NextPlayer(sessionName);
                 SaveSession(sessionName);
             }
         }

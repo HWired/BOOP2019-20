@@ -52,6 +52,7 @@
             this.Card3 = new System.Windows.Forms.PictureBox();
             this.Card2 = new System.Windows.Forms.PictureBox();
             this.Card1 = new System.Windows.Forms.PictureBox();
+            this.CardBox = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.PlayedCard)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Card18)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Card17)).BeginInit();
@@ -389,11 +390,22 @@
             this.Card1.Visible = false;
             this.Card1.Click += new System.EventHandler(this.Card_Click);
             // 
+            // CardBox
+            // 
+            this.CardBox.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.CardBox.Location = new System.Drawing.Point(98, 451);
+            this.CardBox.Name = "CardBox";
+            this.CardBox.Size = new System.Drawing.Size(1163, 251);
+            this.CardBox.TabIndex = 23;
+            this.CardBox.TabStop = false;
+            this.CardBox.Text = "Cards";
+            // 
             // GameGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1370, 714);
+            this.Controls.Add(this.CardBox);
             this.Controls.Add(this.LeaveRoomBtn);
             this.Controls.Add(this.StartGameBtn);
             this.Controls.Add(this.PlayerBox);
@@ -468,5 +480,6 @@
         private System.Windows.Forms.PictureBox Card3;
         private System.Windows.Forms.PictureBox Card2;
         private System.Windows.Forms.PictureBox Card1;
+        private System.Windows.Forms.GroupBox CardBox;
     }
 }

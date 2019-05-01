@@ -146,7 +146,7 @@ namespace Client
         private void OnPlayersChanged (Player[] players)
         {
             Console.WriteLine("Someone joined the room.");
-            gameGUI.UpdatePlayerListInvoke(players);
+            gameGUI.UpdatePlayerListInvoke(players, appState.playerTurn, GetMyPlayer(appState.players));
         }
 
         private void OnGameStateChanged (bool gameStarted)
@@ -169,6 +169,7 @@ namespace Client
         {
             gameGUI.UpdatePlayedCard(appState.cardPlayed);
             gameGUI.UpdatePlayerCards(GetMyPlayer(appState.players).cards);
+            gameGUI.UpdatePlayerListInvoke(appState.players, appState.playerTurn, GetMyPlayer(appState.players));
 
             if (player.id == appState.players.ElementAt(playerIndex).id && player.id == this.playerID)
             {

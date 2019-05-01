@@ -29,19 +29,31 @@ namespace Client
             networking.OnGameWindowReady();
         }
 
-        public void UpdatePlayerList (Player[] players)
+        public void UpdatePlayerList (Player[] players, int playerTurn, Player me)
         {
             PlayerBox.Controls.Clear();
 
             int y = 24;
+            int i = 0;
             foreach (Player player in players)
             {
                 Label playerLabel = new Label();
                 playerLabel.Text = player.name;
                 playerLabel.Location = new Point(24, y);
+
+                if (i == playerTurn)
+                    playerLabel.Location = new Point(48, y);
+
+                if (player.isCreator)
+                    playerLabel.ForeColor = Color.Red;
+
+                if (me.id == player.id)
+                    playerLabel.ForeColor = Color.Green;
+
                 PlayerBox.Controls.Add(playerLabel);
 
                 y += 24;
+                i++;
             }
         }
 
@@ -171,14 +183,14 @@ namespace Client
             }
         }
 
-        public void UpdatePlayerListInvoke (Player[] players)
+        public void UpdatePlayerListInvoke (Player[] players, int playerTurn, Player me)
         {
             if (PlayerBox.InvokeRequired)
                 PlayerBox.Invoke(new MethodInvoker(delegate {
-                    UpdatePlayerList(players);
+                    UpdatePlayerList(players, playerTurn, me);
                 }));
             else
-                UpdatePlayerList(players);
+                UpdatePlayerList(players, playerTurn, me);
         }
 
         private void PlayCardBtn_Click(object sender, EventArgs e)

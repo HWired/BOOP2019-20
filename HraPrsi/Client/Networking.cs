@@ -160,7 +160,11 @@ namespace Client
             }
             else
             {
-                Console.WriteLine("Winner: " + appState.winner);
+                if (gameGUI.InvokeRequired) gameGUI.Invoke(new MethodInvoker(delegate { gameGUI.Close(); }));
+                else gameGUI.Close();
+
+                netSyncTimer.Stop();
+                MessageBox.Show("Winner: " + appState.winner);
             }
         }
 

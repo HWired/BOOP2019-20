@@ -241,6 +241,13 @@ namespace Client.PrsiService {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string winnerField;
+        
+        private bool nextPlayerAceField;
+        
+        private bool nextPlayer7Field;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private Client.PrsiService.Player[] playersField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -264,6 +271,45 @@ namespace Client.PrsiService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
+        public string winner {
+            get {
+                return this.winnerField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.winnerField, value) != true)) {
+                    this.winnerField = value;
+                    this.RaisePropertyChanged("winner");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=1)]
+        public bool nextPlayerAce {
+            get {
+                return this.nextPlayerAceField;
+            }
+            set {
+                if ((this.nextPlayerAceField.Equals(value) != true)) {
+                    this.nextPlayerAceField = value;
+                    this.RaisePropertyChanged("nextPlayerAce");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=2)]
+        public bool nextPlayer7 {
+            get {
+                return this.nextPlayer7Field;
+            }
+            set {
+                if ((this.nextPlayer7Field.Equals(value) != true)) {
+                    this.nextPlayer7Field = value;
+                    this.RaisePropertyChanged("nextPlayer7");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
         public Client.PrsiService.Player[] players {
             get {
                 return this.playersField;
@@ -276,7 +322,7 @@ namespace Client.PrsiService {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=4)]
         public Client.PrsiService.Card[] cardStack {
             get {
                 return this.cardStackField;
@@ -289,7 +335,7 @@ namespace Client.PrsiService {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=5)]
         public Client.PrsiService.Card cardPlayed {
             get {
                 return this.cardPlayedField;
@@ -302,7 +348,7 @@ namespace Client.PrsiService {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=3)]
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=6)]
         public bool gameStarted {
             get {
                 return this.gameStartedField;
@@ -315,7 +361,7 @@ namespace Client.PrsiService {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=4)]
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=7)]
         public int playerTurn {
             get {
                 return this.playerTurnField;

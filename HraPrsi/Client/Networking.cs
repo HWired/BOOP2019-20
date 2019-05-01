@@ -160,7 +160,7 @@ namespace Client
             }
             else
             {
-                Console.WriteLine("Game just ended");
+                Console.WriteLine("Winner: " + appState.winner);
             }
         }
 

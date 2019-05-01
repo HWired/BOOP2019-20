@@ -114,12 +114,50 @@ namespace Server
             {
                 if (CheckCardWithRules(card))
                 {
-                    appState.SetPlayedCard(card);
-                    RemoveCardFromPlayer(player, card);
-                    NextPlayer(sessionName);
+                    if (!appState.nextPlayer7 && !appState.nextPlayerAce)
+                    {
+                        appState.SetPlayedCard(card);
+                        RemoveCardFromPlayer(player, card);
+
+                        if (card.value == CardValue.C7)
+                            appState.nextPlayer7 = true;
+
+                        if (card.value == CardValue.CA)
+                            appState.nextPlayerAce = true;
+                    }
+                    else if (appState.nextPlayer7 && card.value == CardValue.C7)
+                    {
+                        appState.SetPlayedCard(card);
+                        RemoveCardFromPlayer(player, card);
+                        appState.nextPlayer7 = false;
+                    }
+                    else if (appState.nextPlayerAce && card.value == CardValue.CA)
+                    {
+                        appState.SetPlayedCard(card);
+                        RemoveCardFromPlayer(player, card);
+                        appState.nextPlayerAce = false;
+                    }
+
+                    if (IsWinner(player))
+                    {
+                        appState.winner = player.name;
+                        appState.gameStarted = false;
+                    }
+                    else
+                    {
+                        NextPlayer(sessionName);
+                    }
+
+                    
+
                     SaveSession(sessionName);
                 }
             }
+        }
+
+        private bool IsWinner (Player player)
+        {
+            return player.cards.Count == 0 ? true : false;
         }
 
         private void RemoveCardFromPlayer(Player player, Card card)
@@ -142,13 +180,22 @@ namespace Server
 
         private bool CheckCardWithRules (Card card)
         {
-            // Same color? Pass
-            if (appState.cardPlayed.color == card.color && card.value != CardValue.CA)
+            if (card.value == CardValue.C7)
                 return true;
 
-            // Same value? Pass
-            if (appState.cardPlayed.value == card.value)
+            if (card.value == CardValue.CA)
                 return true;
+
+            if (!appState.nextPlayer7 && !appState.nextPlayerAce)
+            {
+                // Same color? Pass
+                if (appState.cardPlayed.color == card.color)
+                    return true;
+
+                // Same value? Pass
+                if (appState.cardPlayed.value == card.value)
+                    return true;
+            }
 
             return false;
         }
@@ -168,8 +215,25 @@ namespace Server
 
             if (IsPlayersTurn(player))
             {
-                appState.players.ElementAt(appState.playerTurn).cards.Add(appState.cardStack.ElementAt(0));
-                appState.cardStack.RemoveAt(0);
+                if (!appState.nextPlayer7 && !appState.nextPlayerAce)
+                {
+                    appState.players.ElementAt(appState.playerTurn).cards.Add(appState.cardStack.ElementAt(0));
+                    appState.cardStack.RemoveAt(0);
+                    
+                }
+                else if (appState.nextPlayer7)
+                {
+                    appState.players.ElementAt(appState.playerTurn).cards.Add(appState.cardStack.ElementAt(0));
+                    appState.cardStack.RemoveAt(0);
+                    appState.players.ElementAt(appState.playerTurn).cards.Add(appState.cardStack.ElementAt(0));
+                    appState.cardStack.RemoveAt(0);
+                    appState.nextPlayer7 = false;
+                }
+                else if (appState.nextPlayerAce)
+                {
+                    appState.nextPlayerAce = false;
+                }
+
                 NextPlayer(sessionName);
                 SaveSession(sessionName);
             }

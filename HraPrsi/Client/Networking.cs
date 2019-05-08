@@ -153,7 +153,8 @@ namespace Client
             if (player.id == appState.players.ElementAt(playerIndex).id && player.id == this.playerID)
             {
                 Console.WriteLine($"My turn: {player.name}");
-            } else
+            }
+            else
             {
                 Console.WriteLine($"Player turn: {player.name}");
             }

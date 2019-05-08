@@ -39,7 +39,7 @@ namespace Client
                     playerLabel.Location = new Point(48, y);
 
                 if (player.isCreator)
-                    playerLabel.ForeColor = Color.Red;
+                    playerLabel.Text = playerLabel.Text + " (Host)";
 
                 if (me.id == player.id)
                     playerLabel.ForeColor = Color.Green;

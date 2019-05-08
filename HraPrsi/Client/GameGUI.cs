@@ -96,6 +96,12 @@ namespace Client
             }
         }
 
+        public void EnableStartGameBtn ()
+        {
+            if (StartGameBtn.InvokeRequired) this.Invoke(new MethodInvoker(delegate { StartGameBtn.Enabled = true; }));
+            else StartGameBtn.Enabled = true;
+        }
+
         private Image CardToImage (Card card)
         {
             if (card.type == CardType.Diamond && card.value == CardValue.CA) return Resources.KaryA;
@@ -159,8 +165,6 @@ namespace Client
 
         public void OnGameStart()
         {
-            networking.LoadState();
-
             if (StartGameBtn.InvokeRequired)
                 StartGameBtn.Invoke(new MethodInvoker(delegate {
                     LeaveRoomBtn.Enabled = false;
@@ -189,9 +193,8 @@ namespace Client
 
         private void PlayCardBtn_Click(object sender, EventArgs e)
         {
-            Console.WriteLine($"Right now am playin card: {selectedCard.card.type}, {selectedCard.card.color}, {selectedCard.card.value}");
+            Console.WriteLine($"Right now am playin' card: {selectedCard.card.type}, {selectedCard.card.color}, {selectedCard.card.value}");
             networking.PlayCard(selectedCard.card);
-            networking.LoadState();
         }
 
 

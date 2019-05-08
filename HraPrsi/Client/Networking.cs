@@ -113,6 +113,9 @@ namespace Client
         public void OnGameWindowReady ()
         {
             OnPlayersChanged(appState.players);
+
+            if (GetMyPlayer(appState.players).isCreator)
+                gameGUI.EnableStartGameBtn();
         }
 
         private void OnPlayersChanged (Player[] players)

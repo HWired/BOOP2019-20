@@ -70,6 +70,7 @@
             // 
             // StartGameBtn
             // 
+            this.StartGameBtn.Enabled = false;
             this.StartGameBtn.Location = new System.Drawing.Point(12, 181);
             this.StartGameBtn.Name = "StartGameBtn";
             this.StartGameBtn.Size = new System.Drawing.Size(95, 23);

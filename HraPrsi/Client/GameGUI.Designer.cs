@@ -40,7 +40,7 @@
             // PlayCardBtn
             // 
             this.PlayCardBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.PlayCardBtn.Location = new System.Drawing.Point(1233, 625);
+            this.PlayCardBtn.Location = new System.Drawing.Point(1225, 625);
             this.PlayCardBtn.Name = "PlayCardBtn";
             this.PlayCardBtn.Size = new System.Drawing.Size(125, 77);
             this.PlayCardBtn.TabIndex = 1;
@@ -91,7 +91,7 @@
             // CardBox
             // 
             this.CardBox.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.CardBox.Location = new System.Drawing.Point(230, 451);
+            this.CardBox.Location = new System.Drawing.Point(226, 451);
             this.CardBox.Name = "CardBox";
             this.CardBox.Size = new System.Drawing.Size(900, 251);
             this.CardBox.TabIndex = 23;
@@ -101,7 +101,7 @@
             // CardOnTheTableBox
             // 
             this.CardOnTheTableBox.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.CardOnTheTableBox.Location = new System.Drawing.Point(580, 190);
+            this.CardOnTheTableBox.Location = new System.Drawing.Point(576, 190);
             this.CardOnTheTableBox.Name = "CardOnTheTableBox";
             this.CardOnTheTableBox.Size = new System.Drawing.Size(194, 233);
             this.CardOnTheTableBox.TabIndex = 23;
@@ -112,7 +112,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1370, 714);
+            this.ClientSize = new System.Drawing.Size(1362, 714);
             this.Controls.Add(this.CardOnTheTableBox);
             this.Controls.Add(this.LeaveRoomBtn);
             this.Controls.Add(this.StartGameBtn);

@@ -39,10 +39,10 @@
             // 
             // PlayCardBtn
             // 
-            this.PlayCardBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.PlayCardBtn.Location = new System.Drawing.Point(1225, 625);
+            this.PlayCardBtn.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.PlayCardBtn.Location = new System.Drawing.Point(525, 544);
             this.PlayCardBtn.Name = "PlayCardBtn";
-            this.PlayCardBtn.Size = new System.Drawing.Size(125, 77);
+            this.PlayCardBtn.Size = new System.Drawing.Size(100, 30);
             this.PlayCardBtn.TabIndex = 1;
             this.PlayCardBtn.Text = "Play Card";
             this.PlayCardBtn.UseVisualStyleBackColor = true;
@@ -50,10 +50,10 @@
             // 
             // SkipTurnBtn
             // 
-            this.SkipTurnBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.SkipTurnBtn.Location = new System.Drawing.Point(12, 625);
+            this.SkipTurnBtn.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.SkipTurnBtn.Location = new System.Drawing.Point(387, 544);
             this.SkipTurnBtn.Name = "SkipTurnBtn";
-            this.SkipTurnBtn.Size = new System.Drawing.Size(128, 77);
+            this.SkipTurnBtn.Size = new System.Drawing.Size(100, 30);
             this.SkipTurnBtn.TabIndex = 2;
             this.SkipTurnBtn.Text = "Skip Turn";
             this.SkipTurnBtn.UseVisualStyleBackColor = true;
@@ -92,7 +92,7 @@
             // CardBox
             // 
             this.CardBox.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.CardBox.Location = new System.Drawing.Point(226, 451);
+            this.CardBox.Location = new System.Drawing.Point(53, 287);
             this.CardBox.Name = "CardBox";
             this.CardBox.Size = new System.Drawing.Size(900, 251);
             this.CardBox.TabIndex = 23;
@@ -102,7 +102,7 @@
             // CardOnTheTableBox
             // 
             this.CardOnTheTableBox.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.CardOnTheTableBox.Location = new System.Drawing.Point(576, 190);
+            this.CardOnTheTableBox.Location = new System.Drawing.Point(397, 13);
             this.CardOnTheTableBox.Name = "CardOnTheTableBox";
             this.CardOnTheTableBox.Size = new System.Drawing.Size(194, 233);
             this.CardOnTheTableBox.TabIndex = 23;
@@ -113,12 +113,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1362, 714);
+            this.ClientSize = new System.Drawing.Size(1008, 586);
+            this.Controls.Add(this.SkipTurnBtn);
             this.Controls.Add(this.CardOnTheTableBox);
             this.Controls.Add(this.LeaveRoomBtn);
             this.Controls.Add(this.StartGameBtn);
             this.Controls.Add(this.PlayerBox);
-            this.Controls.Add(this.SkipTurnBtn);
             this.Controls.Add(this.PlayCardBtn);
             this.Controls.Add(this.CardBox);
             this.Name = "GameGUI";

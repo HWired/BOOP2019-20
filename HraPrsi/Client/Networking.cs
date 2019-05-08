@@ -166,6 +166,7 @@ namespace Client
         public void LeaveRoom ()
         {
             service.LeaveSession(sessionName, this.playerID);
+            startingGUI.ClearSessionCodeInput();
         }
 
         public void PlayCard (Card card)

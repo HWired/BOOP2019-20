@@ -75,5 +75,10 @@ namespace Client
             networking.gameGUI = gameGUI;
             gameGUI.Show();
         }
+
+        public void ClearSessionCodeInput ()
+        {
+            SessionCodeInput.Text = "";
+        }
     }
 }

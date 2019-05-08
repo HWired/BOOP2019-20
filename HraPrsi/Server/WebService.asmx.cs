@@ -148,8 +148,6 @@ namespace Server
                         NextPlayer(sessionName);
                     }
 
-                    
-
                     SaveSession(sessionName);
                 }
             }

@@ -51,7 +51,6 @@
     <Compile Include="DataStructures\ClientCard.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Karta.cs" />
     <Compile Include="Connected Services\PrsiService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

@@ -102,6 +102,15 @@ namespace Client
             else StartGameBtn.Enabled = true;
         }
 
+        public void ShowGameActionBtns ()
+        {
+            if (SkipTurnBtn.InvokeRequired) this.Invoke(new MethodInvoker(delegate { SkipTurnBtn.Visible = true; }));
+            else SkipTurnBtn.Visible = true;
+
+            if (PlayCardBtn.InvokeRequired) this.Invoke(new MethodInvoker(delegate { PlayCardBtn.Visible = true; }));
+            else PlayCardBtn.Visible = true;
+        }
+
         private Image CardToImage (Card card)
         {
             if (card.type == CardType.Diamond && card.value == CardValue.CA) return Resources.KaryA;

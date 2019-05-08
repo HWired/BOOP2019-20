@@ -40,23 +40,25 @@
             // PlayCardBtn
             // 
             this.PlayCardBtn.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.PlayCardBtn.Location = new System.Drawing.Point(525, 544);
+            this.PlayCardBtn.Location = new System.Drawing.Point(530, 551);
             this.PlayCardBtn.Name = "PlayCardBtn";
-            this.PlayCardBtn.Size = new System.Drawing.Size(100, 30);
+            this.PlayCardBtn.Size = new System.Drawing.Size(100, 23);
             this.PlayCardBtn.TabIndex = 1;
             this.PlayCardBtn.Text = "Play Card";
             this.PlayCardBtn.UseVisualStyleBackColor = true;
+            this.PlayCardBtn.Visible = false;
             this.PlayCardBtn.Click += new System.EventHandler(this.PlayCardBtn_Click);
             // 
             // SkipTurnBtn
             // 
             this.SkipTurnBtn.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.SkipTurnBtn.Location = new System.Drawing.Point(387, 544);
+            this.SkipTurnBtn.Location = new System.Drawing.Point(387, 551);
             this.SkipTurnBtn.Name = "SkipTurnBtn";
-            this.SkipTurnBtn.Size = new System.Drawing.Size(100, 30);
+            this.SkipTurnBtn.Size = new System.Drawing.Size(100, 23);
             this.SkipTurnBtn.TabIndex = 2;
             this.SkipTurnBtn.Text = "Skip Turn";
             this.SkipTurnBtn.UseVisualStyleBackColor = true;
+            this.SkipTurnBtn.Visible = false;
             this.SkipTurnBtn.Click += new System.EventHandler(this.SkipTurnBtn_Click);
             // 
             // PlayerBox

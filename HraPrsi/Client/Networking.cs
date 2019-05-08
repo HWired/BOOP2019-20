@@ -131,6 +131,7 @@ namespace Client
                 gameGUI.OnGameStart();
                 gameGUI.UpdatePlayedCard(appState.cardPlayed);
                 gameGUI.UpdatePlayerCards(GetMyPlayer(appState.players).cards);
+                gameGUI.ShowGameActionBtns();
                 Console.WriteLine("Game just started");
             }
             else

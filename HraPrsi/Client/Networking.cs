@@ -1,9 +1,6 @@
 ﻿using Client.PrsiService;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Forms;
 
@@ -52,31 +49,6 @@ namespace Client
             {
                 Console.WriteLine($"Connected to session: {sessionName} (id: {this.playerID})");
                 SetNetworkStateTimer();
-            }
-        }
-
-        public void LoadState ()
-        {
-            appState = service.GetState(sessionName);
-
-            Player me = GetMyPlayer(appState.players);
-
-            Console.WriteLine($"MyPlayer name: {me.name}, isCreator: {me.isCreator}");
-
-            Console.WriteLine("=== APP STATE ===");
-            Console.WriteLine("game started: " + appState.gameStarted);
-            Console.WriteLine("players: ");
-            foreach (Player player in appState.players)
-            {
-                Console.WriteLine("Player: " + player.name + ", isCreator: " + player.isCreator);
-            }
-
-            Console.WriteLine($"Card on the table: {appState.cardPlayed.type}     {appState.cardPlayed.color}        {appState.cardPlayed.value}");
-
-            Console.WriteLine("My cards");
-            foreach (Card card in me.cards)
-            {
-                Console.WriteLine($"{card.type}     {card.color}        {card.value}");
             }
         }
 
@@ -168,7 +140,6 @@ namespace Client
             }
         }
 
-        // voláno potom co někdo táhne/přeskočí kartu
         private void OnTurnChanged (Player player, int playerIndex)
         {
             gameGUI.UpdatePlayedCard(appState.cardPlayed);
@@ -182,10 +153,6 @@ namespace Client
             {
                 Console.WriteLine($"Player turn: {player.name}");
             }
-
-            LoadState();
-
-            // update list of players (GUI)
         }
 
         public void StartGame ()
@@ -198,15 +165,11 @@ namespace Client
             service.LeaveSession(sessionName, this.playerID);
         }
 
-        /* zavolat, když chci hrát kartu
-         * sessionManager.PlayCard(SessionManager.appState.cardStack.ElementAt(3)); - z GUI.cs
-        */
         public void PlayCard (Card card)
         {
             service.PlayCard(sessionName, this.playerID, card);
         }
 
-        // zavolat, když chci přeskočit můj tah
         public void SkipTurn ()
         {
             service.SkipTurn(sessionName, this.playerID);
